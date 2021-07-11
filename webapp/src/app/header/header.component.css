@@ -1,0 +1,15 @@
+.header {
+  background: #3f51b5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+  height: 8%;
+}
+
+.header button {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  height: 100%;
+}

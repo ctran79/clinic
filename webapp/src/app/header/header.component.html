@@ -1,0 +1,8 @@
+<div [className]="'header'">
+  <button mat-button [matMenuTriggerFor]="recipeMenu">Đơn thuốc</button>
+  <mat-menu #recipeMenu="matMenu" yPosition="below">
+    <button mat-menu-item routerLink="/recipe-detail">Kê đơn</button>
+    <button mat-menu-item >Danh sách</button>
+  </mat-menu>
+  <button routerLink="/drug-list" mat-button>Danh mục thuốc</button>
+</div>

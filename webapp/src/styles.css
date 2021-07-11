@@ -1,0 +1,10 @@
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.button-panel > .next-button {
+  margin-left: 1%;
+}
+
