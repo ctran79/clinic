@@ -7,20 +7,20 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
-import {MatDividerModule} from "@angular/material/divider";
+ import {MatDividerModule} from "@angular/material/divider";
 import {MatMenuModule} from "@angular/material/menu";
-import { DrugListComponent } from './drug-list/drug-list.component';
-import { DrugDetailComponent } from './drug-detail/drug-detail.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    RecipeDetailComponent,
-    DrugListComponent,
-    DrugDetailComponent
+     ProductListComponent,
+    ProductDetailComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

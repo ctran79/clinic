@@ -1,24 +1,24 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RecipeDetailComponent} from "./recipe-detail/recipe-detail.component";
-import {DrugListComponent} from "./drug-list/drug-list.component";
-import {DrugDetailComponent} from "./drug-detail/drug-detail.component";
+import {OrderDetailComponent} from "./order-detail/order-detail.component";
+import {ProductListComponent} from "./product-list/product-list.component";
+import {ProductDetailComponent} from "./product-detail/product-detail.component";
 
 const routes: Routes = [
   {
-    path: 'recipe-detail', component: RecipeDetailComponent
+    path: 'order-detail', component: OrderDetailComponent
   },
   {
-    path: 'drug-list', component: DrugListComponent
+    path: 'product-list', component: ProductListComponent
   },
   {
-    path: 'drug-detail', component: DrugDetailComponent
+    path: 'product-detail', component: ProductDetailComponent
   },
   {
-    path: 'drug-detail/:id', component: DrugDetailComponent
+    path: 'product-detail/:id', component: ProductDetailComponent
   },
   {
-    path: '', redirectTo: '/recipe', pathMatch: 'full'
+    path: '', redirectTo: '/product-detail', pathMatch: 'full'
   }
 ];
 
