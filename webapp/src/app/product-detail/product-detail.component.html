@@ -1,1 +1,21 @@
-<p>product-detail works!</p>
+<h2>
+  Thêm/sửa thuốc:
+</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <mat-form-field style="width:50vw">
+    <input matInput placeholder="Tên thuốc" formControlName="name">
+    <!-- error -->
+    <mat-error *ngIf="errorHandling('name', 'required')">
+      Nhập tên thuốc
+    </mat-error>
+  </mat-form-field>
+   <mat-form-field style="width:50vw">
+    <input matInput placeholder="Code" formControlName="code">
+  </mat-form-field>
+  <mat-form-field style="width:50vw">
+    <input matInput placeholder="Cách dùng" formControlName="note">
+  </mat-form-field>
+  <div>
+    <button mat-flat-button color="primary">Lưu</button>
+  </div>
+</form>

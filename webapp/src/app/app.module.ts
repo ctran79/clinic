@@ -5,22 +5,25 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
- import {MatDividerModule} from "@angular/material/divider";
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {MatDividerModule} from "@angular/material/divider";
 import {MatMenuModule} from "@angular/material/menu";
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
+import {ProductListComponent} from './product-list/product-list.component';
+import {ProductDetailComponent} from './product-detail/product-detail.component';
+import {OrderDetailComponent} from './order-detail/order-detail.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-     ProductListComponent,
+    ProductListComponent,
     ProductDetailComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,10 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
