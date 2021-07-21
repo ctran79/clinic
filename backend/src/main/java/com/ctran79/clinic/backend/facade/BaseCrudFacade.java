@@ -20,5 +20,19 @@ public abstract class BaseCrudFacade<E extends BaseEntity, D> {
         return toDto(obj);
     }
 
+    public D createModel(D dto) {
+        E entity = toEntity(dto);
+        entity = service.createModel(entity);
+        return toDto(entity);
+    }
+
+    public D updateModel(D dto) {
+        E entity = toEntity(dto);
+        entity = service.updateModel(entity);
+        return toDto(entity);
+    }
+
     public abstract D toDto(E entity);
+
+    public abstract E toEntity(D dto);
 }

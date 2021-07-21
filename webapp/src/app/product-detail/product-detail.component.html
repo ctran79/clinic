@@ -1,21 +1,21 @@
 <h2>
   Thêm/sửa thuốc:
 </h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
   <mat-form-field style="width:50vw">
-    <input matInput placeholder="Tên thuốc" formControlName="name">
+    <input formControlName="name" matInput placeholder="Tên thuốc">
     <!-- error -->
     <mat-error *ngIf="errorHandling('name', 'required')">
       Nhập tên thuốc
     </mat-error>
   </mat-form-field>
-   <mat-form-field style="width:50vw">
-    <input matInput placeholder="Code" formControlName="code">
+  <mat-form-field style="width:50vw">
+    <input formControlName="code" matInput placeholder="Code">
   </mat-form-field>
   <mat-form-field style="width:50vw">
-    <input matInput placeholder="Cách dùng" formControlName="note">
+    <input formControlName="note" matInput placeholder="Cách dùng">
   </mat-form-field>
   <div>
-    <button mat-flat-button color="primary">Lưu</button>
+    <button color="primary" mat-flat-button>Lưu</button>
   </div>
 </form>

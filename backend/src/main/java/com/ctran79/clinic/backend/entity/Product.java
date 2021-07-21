@@ -20,4 +20,5 @@ public class Product extends BaseEntity {
     @NotNull
     private String code;
     private String name;
+    private String note;
 }

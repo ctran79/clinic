@@ -24,4 +24,13 @@ public class ProductFacade extends BaseCrudFacade<Product, ProductDto> {
                 .name(entity.getName())
                 .build();
     }
+
+    @Override
+    public Product toEntity(ProductDto dto) {
+        Product product = dto.getId() != null ? productService.getById(dto.getId()) : new Product();
+        product.setName(dto.getName());
+        product.setCode(dto.getCode());
+        product.setNote(dto.getNote());
+        return product;
+    }
 }

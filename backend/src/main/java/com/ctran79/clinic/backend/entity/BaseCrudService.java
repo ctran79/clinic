@@ -17,4 +17,12 @@ public abstract class BaseCrudService<E extends BaseEntity> {
     public E getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new HibernateException("Object not found - id:" + id));
     }
+
+    public E createModel(E entity) {
+        return repository.save(entity);
+    }
+
+    public E updateModel(E entity) {
+        return repository.save(entity);
+    }
 }

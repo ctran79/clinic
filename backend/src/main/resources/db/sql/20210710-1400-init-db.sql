@@ -4,5 +4,6 @@
 create table products (
     id serial,
     code varchar(255),
-    name varchar(1023)
+    name varchar(1023),
+    note varchar(1023)
 )
