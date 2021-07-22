@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {Product} from "../domain/product";
 import {ProductService} from "../service/product.service";
-import {MatTableDataSource} from "@angular/material/table";
+import {TableBase} from "../table-base";
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
-  displayedColumns : string[] = ['code', 'name', 'note'];
-  dataSource = new MatTableDataSource<Product>();
+export class ProductListComponent extends TableBase<Product> {
+  displayedColumns: string[] = ['name', 'note', 'code', 'actions'];
 
-  constructor(public productService: ProductService) { }
-
-  ngOnInit(): void {
+  constructor(public productService: ProductService) {
+    super(productService);
   }
 
-  addData() {
+  ngOnInit(): void {
+    super.ngOnInit();
+  }
 
+  edit(obj: Product) {
   }
 }

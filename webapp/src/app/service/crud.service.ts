@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {from, Observable} from "rxjs";
 import {BaseObject} from "../domain/base-object";
 import {environment} from "../../environments/environment";
 import {BaseSearchModel} from "../domain/base-search-model";
+import {fromArray} from "rxjs/internal/observable/fromArray";
+import {Product} from "../domain/product";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,8 @@ export abstract class CrudService<T extends BaseObject> {
        return this.http.put<T>(`${this.api}/${model.id}`, model);
    }
 
-  public search(searchModel: BaseSearchModel) {
+  public search(searchModel: BaseSearchModel) : Observable<T[]> {
+    return this.http.get<T[]>(`${this.api}/search`);
   }
 
   public getModel(id: number): Observable<T> {

@@ -4,4 +4,14 @@ html, body {
   margin: 0;
 }
 
+.th-center {
+  text-align: center;
+}
 
+.th-left {
+  text-align: left;
+}
+
+.th-right {
+  text-align: right;
+}
