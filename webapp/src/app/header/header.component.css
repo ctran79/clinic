@@ -4,7 +4,9 @@
   flex-wrap: wrap;
   align-items: center;
   padding: 8px 16px;
-  height: 8%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  min-height: 40px;
 }
 
 .header button {

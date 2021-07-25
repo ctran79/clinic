@@ -74,7 +74,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-   navigateToList() {
-    this.router.navigate(['/product-list']);
+  async navigateToList() {
+    await this.router.navigate(['/product-list']);
   }
 }

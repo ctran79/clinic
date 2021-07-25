@@ -1,0 +1,11 @@
+<mat-grid-list
+  [cols]="filter.fields.length"
+  rowHeight="60px">
+
+  <mat-grid-tile *ngFor="let item of filter.fields; let i = index" [colspan]="1"
+                 [rowspan]="1">
+    <mat-form-field *ngIf="item.type === 'string'" class="filter-field">
+      <input [(ngModel)]="item.value" [placeholder]="'Tìm theo ' + item.label" matInput type="text"/>
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>

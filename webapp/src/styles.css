@@ -2,16 +2,31 @@ html, body {
   height: 100%;
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
-.th-center {
+table {
+  width: 100%;
+}
+
+.filter-field {
+  width: 100%;
+  margin-right: 10%;
+}
+
+.mat-column-actions {
+  flex: 0 0 120px !important;
+  white-space: unset !important;
+}
+
+.text-center {
   text-align: center;
 }
 
-.th-left {
-  text-align: left;
+.m-top-1 {
+  margin-top: 1%;
 }
 
-.th-right {
-  text-align: right;
+.m-left-1 {
+  margin-left: 1% !important;
 }

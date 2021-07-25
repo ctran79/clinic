@@ -1,8 +1,8 @@
-<div [className]="'header'">
-  <button mat-button [matMenuTriggerFor]="orderMenu">Đơn thuốc</button>
-  <mat-menu #orderMenu="matMenu" yPosition="below">
-    <button mat-menu-item routerLink="/product-detail">Kê đơn</button>
-    <button mat-menu-item routerLink="/product-list">Danh sách</button>
+<div class='header'>
+  <button [matMenuTriggerFor]='orderMenu' mat-button>Đơn thuốc</button>
+  <mat-menu #orderMenu='matMenu' yPosition='below'>
+    <button mat-menu-item routerLink='/order-detail'>Kê đơn</button>
+    <button mat-menu-item routerLink='/order-list'>Danh sách</button>
   </mat-menu>
-  <button routerLink="/product-list" mat-button>Danh mục thuốc</button>
+  <button mat-button routerLink='/product-list'>Danh sách thuốc</button>
 </div>

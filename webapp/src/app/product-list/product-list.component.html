@@ -1,9 +1,12 @@
 <h2>Danh sách thuốc</h2>
-
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<app-table-filter [filter]="searchModel" (change)="onFilterChanged()" ></app-table-filter>
+<mat-table #table
+           (matSortChange)="sortData($event)"
+           [dataSource]="dataSource"
+           matSort>
 
   <ng-container matColumnDef="name">
-    <mat-header-cell  *matHeaderCellDef><b>Tên</b></mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Tên</b></mat-header-cell>
     <mat-cell *matCellDef="let obj">{{obj.name}}</mat-cell>
   </ng-container>
 
@@ -13,7 +16,7 @@
   </ng-container>
 
   <ng-container matColumnDef="code">
-    <mat-header-cell *matHeaderCellDef><b>Code</b></mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Code</b></mat-header-cell>
     <mat-cell *matCellDef="let obj">{{obj.code}}</mat-cell>
   </ng-container>
 
@@ -27,10 +30,16 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
-
-<div style="margin-top: 1%">
-  <button color="primary" mat-raised-button>Thêm</button>
+<div *ngIf="totalElements < 1" class="text-center m-top-1">Không có dữ liệu</div>
+<mat-paginator
+  (page)="pageChange($event)"
+  [length]="totalElements"
+  [pageIndex]="0"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="pageSizeOptions[0]"
+></mat-paginator>
+<div class="m-top-1">
+  <button (click)="add()" color="primary" mat-raised-button>Thêm</button>
 </div>
