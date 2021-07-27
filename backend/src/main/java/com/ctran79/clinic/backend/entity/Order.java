@@ -4,13 +4,10 @@ import com.ctran79.clinic.backend.domain.OrderDto;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +23,7 @@ public class Order extends BaseEntity {
     private String address;
     private LocalDateTime createDate;
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
     private List<OrderItem> items = new ArrayList<>();
 
     @PrePersist
@@ -49,9 +46,9 @@ public class Order extends BaseEntity {
     }
 
     public Order toEntity(OrderDto dto) {
-        setId(dto.getId());
-        setClient(dto.getClient());
-        setAddress(dto.getAddress());
+//        setId(dto.getId());
+        this.client = dto.getClient();
+//        setAddress(dto.getAddress());
         return this;
     }
 }

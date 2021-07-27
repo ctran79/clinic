@@ -6,6 +6,7 @@ import com.ctran79.clinic.backend.specification.OrderSpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * @author ctran79
  */
-
+@Service
 public class OrderService extends BaseCrudService<Order, OrderDto> {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
@@ -44,11 +45,8 @@ public class OrderService extends BaseCrudService<Order, OrderDto> {
 
     @Override
     public Order toEntity(OrderDto dto) {
-        Order order = Optional.ofNullable(dto.getId())
-                .map(orderRepository::getById)
-                .orElseGet(() -> new Order());
+        Order order = (dto.getId() == null ? new Order().toEntity(dto) : orderRepository.getById(dto.getId())).toEntity(dto);
 
-        order = order.toEntity(dto);
         order.getItems().clear();
         if (!dto.getItems().isEmpty()) {
             for (OrderItemDto itemDto : dto.getItems()) {
