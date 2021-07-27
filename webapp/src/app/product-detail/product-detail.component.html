@@ -3,7 +3,14 @@
 </h2>
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
   <mat-form-field style="width:50vw">
-    <input formControlName="name" matInput placeholder="Tên thuốc">
+    <mat-label>Tên thuốc</mat-label>
+    <input type="text" matInput [formControl]="getControl('name')" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredProducts | async" [value]="option.name">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+
     <!-- error -->
     <mat-error *ngIf="errorHandling('name', 'required')">
       Nhập tên thuốc
@@ -17,6 +24,6 @@
   </mat-form-field>
   <div>
     <button color="primary" mat-flat-button>Lưu</button>
-    <button color="warn" class="m-left-1" mat-flat-button>Quay lại danh sách thuốc</button>
+    <button color="warn" class="m-left-1" mat-flat-button>Danh sách thuốc</button>
   </div>
 </form>

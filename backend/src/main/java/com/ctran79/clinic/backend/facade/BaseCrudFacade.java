@@ -17,27 +17,27 @@ import java.util.stream.Collectors;
 
 public abstract class BaseCrudFacade<E extends BaseEntity, D> {
 
-    private BaseCrudService<E> service;
+    private BaseCrudService<E, D> service;
 
-    protected BaseCrudFacade(BaseCrudService<E> service) {
+    protected BaseCrudFacade(BaseCrudService<E, D> service) {
         this.service = service;
     }
 
     public D getById(Long id) {
         E obj = service.getById(id);
-        return toDto(obj);
+        return service.toDto(obj);
     }
 
     public D createOrUpdateModel(D dto) {
-        E entity = toEntity(dto);
+        E entity = service.toEntity(dto);
         entity = service.createOrUpdateModel(entity);
-        return toDto(entity);
+        return service.toDto(entity);
     }
 
     public PagedSearchResultDto<D> search(Map<String, String> params) {
         Page<E> founded = service.search(params);
         List<D> content = founded.getContent().stream()
-                .map(this::toDto)
+                .map(service::toDto)
                 .collect(Collectors.toList());
 
         PagedSearchResultDto<D> pagedSearchResultDto = new PagedSearchResultDto<>();
@@ -47,9 +47,4 @@ public abstract class BaseCrudFacade<E extends BaseEntity, D> {
 
         return pagedSearchResultDto;
     }
-
-    public abstract D toDto(E entity);
-
-    public abstract E toEntity(D dto);
-
 }

@@ -23,6 +23,13 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import { TableFilterComponent } from './table-filter/table-filter.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import { OrderItemDialogComponent } from './order-item-dialog/order-item-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatSelectModule} from "@angular/material/select";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { OrderListComponent } from './order-list/order-list.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -33,10 +40,14 @@ import {MatGridListModule} from "@angular/material/grid-list";
     ProductDetailComponent,
     OrderDetailComponent,
     TableFilterComponent,
-  ],
+    OrderItemDialogComponent,
+    OrderListComponent,
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatDialogModule,
+    MatNativeDateModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatDividerModule,
@@ -51,9 +62,12 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MatPaginatorModule,
     MatSortModule,
     FormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatDatepickerModule
   ],
-  providers: [],
+  providers: [ { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

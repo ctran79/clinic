@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Product} from "../domain/product";
-import {ActivatedRoute, Route, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../service/product.service";
+import {Observable} from "rxjs";
+import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
+import {ProductSearchModel} from "../domain/product-search-model";
+import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 
 @Component({
   selector: 'app-product-detail',
@@ -14,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
   form!: FormGroup;
   product!: Product;
   id: number = this.activatedRoute.snapshot.params.id;
+  filteredProducts!: Observable<Product[]>
 
   constructor(public formBuilder: FormBuilder,
               public router: Router,
@@ -24,7 +29,31 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.createFormView();
     this.getData();
+    this.filteredProducts = this.getControl('name').valueChanges
+      .pipe(
+        startWith(''),
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap(val => {
+          return this.filter(val || '')
+        })
+      );
   }
+
+  filter(val: string): Observable<Product[]> {
+    let productSearchModel = new ProductSearchModel();
+    productSearchModel.fields.forEach(field => {
+      if (field.name = 'name') {
+        field.value = val;
+      }
+    });
+
+    return this.productService.search(productSearchModel)
+      .pipe(
+        map(response => response.content.filter(product => product.name.toLowerCase().indexOf(val.toLowerCase()) >= 0))
+      );
+  }
+
 
   createFormView() {
     this.form = this.formBuilder.group({
@@ -35,7 +64,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   errorHandling(control: string, error: string) {
-    return this.form.controls[control].hasError(error);
+    return this.getControl(control).hasError(error);
   }
 
   onSubmit() {
@@ -45,8 +74,8 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  getControl(name: string): AbstractControl {
-    return this.form.controls[name];
+  getControl(name: string): FormControl {
+    return this.form.controls[name] as FormControl;
   }
 
   createObject() {

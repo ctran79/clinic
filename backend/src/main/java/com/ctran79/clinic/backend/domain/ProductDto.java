@@ -10,6 +10,7 @@ import lombok.Setter;
 
 @Builder
 @Getter
+@Setter
 public class ProductDto {
     private Long id;
     private String code;

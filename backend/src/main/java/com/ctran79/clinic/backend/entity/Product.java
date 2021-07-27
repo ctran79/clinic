@@ -29,4 +29,13 @@ public class Product extends BaseEntity {
         this.setNote(dto.getNote());
         return this;
     }
+
+    public ProductDto toDto() {
+        return ProductDto.builder()
+                .id(getId())
+                .code(getCode())
+                .name(getName())
+                .note(getNote())
+                .build();
+    }
 }

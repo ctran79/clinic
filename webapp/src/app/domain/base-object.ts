@@ -1,3 +1,3 @@
 export interface BaseObject {
-  id: number;
+  id?: number;
 }

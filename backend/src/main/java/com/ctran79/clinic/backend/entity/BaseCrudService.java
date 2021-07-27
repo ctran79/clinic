@@ -13,7 +13,7 @@ import java.util.Map;
  * @author ctran79
  */
 
-public abstract class BaseCrudService<E extends BaseEntity> {
+public abstract class BaseCrudService<E extends BaseEntity, D> {
 
     public static final String PAGE_SIZE = "pageSize";
     public static final String PAGE_NUM = "pageNum";
@@ -60,4 +60,8 @@ public abstract class BaseCrudService<E extends BaseEntity> {
     }
 
     protected abstract Specification buildSpecification(Map<String, String> params);
+
+    public abstract D toDto(E entity);
+
+    public abstract E toEntity(D dto);
 }

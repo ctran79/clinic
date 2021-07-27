@@ -51,7 +51,7 @@ export abstract class CrudService<T extends BaseObject> {
     searchModel.fields.forEach(field => {
       if (_.isDate(field.value)) {
         params = params.set(field.name, field.value.toISOString().substr(0, 10));
-      } else {
+      } else if (!_.isEmpty(field.value)) {
         params = params.set(field.name, field.value);
       }
     });

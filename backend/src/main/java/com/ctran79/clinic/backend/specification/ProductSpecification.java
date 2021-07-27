@@ -19,13 +19,13 @@ public class ProductSpecification extends BaseSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             if (StringUtils.hasText(params.get(Product_.CODE))) {
-                predicates.add(criteriaBuilder.like(root.get(Product_.CODE), "%" + params.get(Product_.CODE).toLowerCase() + "%"));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(Product_.CODE)), "%" + params.get(Product_.CODE).toLowerCase() + "%"));
             }
             if (StringUtils.hasText(params.get(Product_.NAME))) {
-                predicates.add(criteriaBuilder.like(root.get(Product_.NAME), "%" + params.get(Product_.NAME).toLowerCase() + "%"));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(Product_.NAME)), "%" + params.get(Product_.NAME).toLowerCase() + "%"));
             }
             if (StringUtils.hasText(params.get(Product_.NOTE))) {
-                predicates.add(criteriaBuilder.like(root.get(Product_.NOTE), "%" + params.get(Product_.NOTE).toLowerCase() + "%"));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(Product_.NOTE)), "%" + params.get(Product_.NOTE).toLowerCase() + "%"));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));

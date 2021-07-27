@@ -17,23 +17,4 @@ public class ProductFacade extends BaseCrudFacade<Product, ProductDto> {
         super(productService);
         this.productService = productService;
     }
-
-    @Override
-    public ProductDto toDto(Product entity) {
-        return ProductDto.builder()
-                .id(entity.getId())
-                .code(entity.getCode())
-                .name(entity.getName())
-                .note(entity.getNote())
-                .build();
-    }
-
-    @Override
-    public Product toEntity(ProductDto dto) {
-        Product product = Optional.ofNullable(dto.getId())
-                .map(productService::getById)
-                .orElseGet(() -> new Product());
-
-        return product.toEntity(dto);
-    }
 }

@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Kê thuốc</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field style="width:50vw">
+      <mat-label>Tên thuốc</mat-label>
+      <input type="text" matInput [formControl]="getControl('productName')" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectProduct($event)">
+        <mat-option *ngFor="let option of filteredProducts | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+
+      <!-- error -->
+      <mat-error *ngIf="errorHandling('productId', 'required')">
+        Nhập tên thuốc
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field style="width:50vw">
+      <input formControlName="note" matInput placeholder="Cách dùng">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="closeDialog()">Lưu</button>
+  <button mat-flat-button color="warn" mat-dialog-close>Đóng</button>
+</mat-dialog-actions>
