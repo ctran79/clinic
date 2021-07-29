@@ -1,6 +1,6 @@
-package com.ctran79.clinic.backend.entity;
+package com.ctran79.clinic.backend.domain.product;
 
-import com.ctran79.clinic.backend.domain.ProductDto;
+import com.ctran79.clinic.backend.domain.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +23,6 @@ public class Product extends BaseEntity {
     private String note;
 
     public Product toEntity(ProductDto dto) {
-        this.setId(dto.getId());
         this.setCode(dto.getCode());
         this.setName(dto.getName());
         this.setNote(dto.getNote());

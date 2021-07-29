@@ -1,5 +1,6 @@
-package com.ctran79.clinic.backend.entity;
+package com.ctran79.clinic.backend.service;
 
+import com.ctran79.clinic.backend.domain.BaseEntity;
 import org.hibernate.HibernateException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author ctran79
  */
 
-public abstract class BaseCrudService<E extends BaseEntity, D> {
+public abstract class BaseCrudService<E extends BaseEntity> {
 
     public static final String PAGE_SIZE = "pageSize";
     public static final String PAGE_NUM = "pageNum";
@@ -60,8 +61,4 @@ public abstract class BaseCrudService<E extends BaseEntity, D> {
     }
 
     protected abstract Specification buildSpecification(Map<String, String> params);
-
-    public abstract D toDto(E entity);
-
-    public abstract E toEntity(D dto);
 }

@@ -1,4 +1,4 @@
-package com.ctran79.clinic.backend.domain;
+package com.ctran79.clinic.backend.domain.product;
 
 import lombok.Builder;
 import lombok.Getter;

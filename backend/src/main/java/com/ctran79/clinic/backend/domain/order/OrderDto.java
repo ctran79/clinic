@@ -1,15 +1,10 @@
-package com.ctran79.clinic.backend.domain;
+package com.ctran79.clinic.backend.domain.order;
 
-import com.ctran79.clinic.backend.entity.OrderItem;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**

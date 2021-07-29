@@ -1,6 +1,6 @@
 package com.ctran79.clinic.backend.specification;
 
-import com.ctran79.clinic.backend.entity.Product_;
+import com.ctran79.clinic.backend.domain.product.Product_;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 

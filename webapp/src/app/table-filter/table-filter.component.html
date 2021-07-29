@@ -7,8 +7,9 @@
     <mat-form-field *ngIf="item.type === 'string'" class="filter-field">
       <input [(ngModel)]="item.value" [placeholder]="'Tìm theo ' + item.label" matInput type="text"/>
     </mat-form-field>
+
     <mat-form-field *ngIf="item.type === 'date'" class="filter-field">
-      <input [(ngModel)]="item.value" [matDatepicker]="picker" [placeholder]="'Tìm theo ' + item.label" matInput
+      <input (dateChange)="onDateChange()" (dateInput)="onDateChange()" [(ngModel)]="item.value" [matDatepicker]="picker" [placeholder]="'Tìm theo ' + item.label" matInput
              matInput type="text"/>
       <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

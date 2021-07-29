@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {BaseSearchModel} from "../domain/base-search-model";
 import * as _ from "lodash";
 import {PagedSearchResult} from "../domain/paged-search-result";
+import {formatDate} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +51,7 @@ export abstract class CrudService<T extends BaseObject> {
 
     searchModel.fields.forEach(field => {
       if (_.isDate(field.value)) {
-        params = params.set(field.name, field.value.toISOString().substr(0, 10));
+        params = params.set(field.name, formatDate(field.value, 'dd/MM/yyyy HH:mm:ss', 'en-GB'));
       } else if (!_.isEmpty(field.value)) {
         params = params.set(field.name, field.value);
       }

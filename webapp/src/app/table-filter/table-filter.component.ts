@@ -9,13 +9,18 @@ import {BaseSearchModel} from "../domain/base-search-model";
 export class TableFilterComponent implements OnInit {
 
   @Input()
-  filter! : BaseSearchModel;
+  filter!: BaseSearchModel;
 
   @Output()
   public change = new EventEmitter<BaseSearchModel>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  onDateChange() {
+    this.change.emit(this.filter);
   }
 }

@@ -1,4 +1,4 @@
-package com.ctran79.clinic.backend.entity;
+package com.ctran79.clinic.backend.domain;
 
 import lombok.Getter;
 import lombok.Setter;

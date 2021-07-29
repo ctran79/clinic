@@ -21,15 +21,17 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatIconModule} from "@angular/material/icon";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
-import { TableFilterComponent } from './table-filter/table-filter.component';
+import {TableFilterComponent} from './table-filter/table-filter.component';
 import {MatGridListModule} from "@angular/material/grid-list";
-import { OrderItemDialogComponent } from './order-item-dialog/order-item-dialog.component';
+import {OrderItemDialogComponent} from './order-item-dialog/order-item-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import { OrderListComponent } from './order-list/order-list.component';
+import {OrderListComponent} from './order-list/order-list.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+
+const DATE_LOCALE = 'en-GB';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
     TableFilterComponent,
     OrderItemDialogComponent,
     OrderListComponent,
-   ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -67,7 +69,7 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
     MatAutocompleteModule,
     MatDatepickerModule
   ],
-  providers: [ { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

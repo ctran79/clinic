@@ -1,7 +1,6 @@
-package com.ctran79.clinic.backend.entity;
+package com.ctran79.clinic.backend.domain.order;
 
-import com.ctran79.clinic.backend.domain.OrderDto;
-import com.ctran79.clinic.backend.domain.OrderItemDto;
+import com.ctran79.clinic.backend.domain.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +42,6 @@ public class OrderItem extends BaseEntity {
     }
 
     public void toEntity(OrderItemDto dto) {
-        setId(dto.getId());
         setSeqNo(dto.getSeqNo());
         setProductId(dto.getProductId());
         setProductName(dto.getProductName());

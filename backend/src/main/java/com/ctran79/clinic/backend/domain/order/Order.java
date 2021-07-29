@@ -1,6 +1,6 @@
-package com.ctran79.clinic.backend.entity;
+package com.ctran79.clinic.backend.domain.order;
 
-import com.ctran79.clinic.backend.domain.OrderDto;
+import com.ctran79.clinic.backend.domain.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +23,7 @@ public class Order extends BaseEntity {
     private String address;
     private LocalDateTime createDate;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
     private List<OrderItem> items = new ArrayList<>();
 
     @PrePersist
@@ -46,9 +46,8 @@ public class Order extends BaseEntity {
     }
 
     public Order toEntity(OrderDto dto) {
-//        setId(dto.getId());
-        this.client = dto.getClient();
-//        setAddress(dto.getAddress());
+        setClient(dto.getClient());
+        setAddress(dto.getAddress());
         return this;
     }
 }

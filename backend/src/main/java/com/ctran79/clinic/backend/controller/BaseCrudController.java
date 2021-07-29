@@ -1,11 +1,8 @@
 package com.ctran79.clinic.backend.controller;
 
 import com.ctran79.clinic.backend.domain.PagedSearchResultDto;
-import com.ctran79.clinic.backend.entity.BaseEntity;
+import com.ctran79.clinic.backend.domain.BaseEntity;
 import com.ctran79.clinic.backend.facade.BaseCrudFacade;
-import org.springframework.data.domain.Page;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
