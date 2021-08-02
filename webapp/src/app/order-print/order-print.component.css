@@ -6,3 +6,7 @@
 .white-space-pre-line {
   white-space: pre-line;
 }
+
+.mat-header-cell, .mat-cell {
+  color: black;
+}
