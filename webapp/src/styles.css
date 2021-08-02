@@ -30,3 +30,7 @@ table {
 .m-left-1 {
   margin-left: 1% !important;
 }
+
+#print-section {
+  display: none;
+}

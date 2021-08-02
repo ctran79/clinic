@@ -1,0 +1,8 @@
+.mat-column-seqNo {
+  flex: 0 0 40px !important;
+  white-space: unset !important;
+}
+
+.white-space-pre-line {
+  white-space: pre-line;
+}

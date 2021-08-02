@@ -25,7 +25,7 @@ const routes: Routes = [
     path: 'product-list', component: ProductListComponent
   },
   {
-    path: '', redirectTo: '/order-detail', pathMatch: 'full'
+    path: '', redirectTo: '/order-list', pathMatch: 'full'
   }
 ];
 

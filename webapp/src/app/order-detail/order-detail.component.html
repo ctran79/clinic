@@ -45,8 +45,16 @@
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
 </form>
+
+<ng-container *ngIf="order">
+  <app-order-print [order]="order"></app-order-print>
+</ng-container>
+
 <div class="m-top-1">
-  <button color="primary"mat-flat-button (click)="edit()">Thêm thuốc</button>
-  <button class="m-left-1" color="primary" mat-flat-button (click)="onSubmit()">Lưu đơn</button>
-  <button class="m-left-1" color="warn" mat-flat-button (click)="navigateToList()">Danh sách đơn thuốc</button>
+  <button (click)="edit()" color="primary" mat-flat-button>Thêm thuốc</button>
+  <button (click)="onSubmit()" class="m-left-1" color="primary" mat-flat-button>Lưu đơn</button>
+  <button printSectionId="print-section" ngxPrint class="m-left-1" color="primary" [useExistingCss]="true"
+          mat-flat-button>In đơn
+  </button>
+  <button (click)="navigateToList()" class="m-left-1" color="warn" mat-flat-button>Danh sách đơn thuốc</button>
 </div>

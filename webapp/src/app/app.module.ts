@@ -30,8 +30,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {OrderListComponent} from './order-list/order-list.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
-
-const DATE_LOCALE = 'en-GB';
+import {NgxPrintModule} from "ngx-print";
+import {OrderPrintComponent} from './order-print/order-print.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +44,7 @@ const DATE_LOCALE = 'en-GB';
     TableFilterComponent,
     OrderItemDialogComponent,
     OrderListComponent,
+    OrderPrintComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +68,8 @@ const DATE_LOCALE = 'en-GB';
     MatGridListModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    NgxPrintModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ProductService} from "../service/product.service";
 import {Order} from "../domain/order";
 import {OrderService} from "../service/order.service";
 import {MatTableDataSource} from "@angular/material/table";
@@ -25,8 +24,8 @@ export class OrderDetailComponent implements OnInit {
               public router: Router,
               public dialog: MatDialog,
               public activatedRoute: ActivatedRoute,
-              public productService: ProductService,
-              public orderService: OrderService) {
+              public orderService: OrderService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -73,6 +72,9 @@ export class OrderDetailComponent implements OnInit {
   }
 
   patchFormValue(order: Order) {
+    if (order.id) {
+      this.id = order.id;
+    }
     this.order = order;
     this.form.patchValue({
       client: order.client,
