@@ -2,14 +2,14 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.ctran79</groupId>
+        <artifactId>clinic</artifactId>
+        <version>1.0</version>
     </parent>
-    <groupId>com.ctran79.clinic</groupId>
-    <artifactId>backend</artifactId>
+
+     <artifactId>backend</artifactId>
     <version>1.0</version>
     <name>backend</name>
     <description>Clinic backend</description>
@@ -74,6 +74,12 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.ctran79</groupId>
+            <artifactId>webapp</artifactId>
+            <version>1.0</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -89,6 +95,24 @@
     </profiles>
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals><goal>copy-resources</goal></goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.parent.basedir}/webapp/dist/webapp/</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

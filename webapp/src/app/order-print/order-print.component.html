@@ -33,7 +33,10 @@
 
     <ng-container matColumnDef="product">
       <mat-header-cell *matHeaderCellDef><b>Tên thuốc và cách dùng</b></mat-header-cell>
-      <mat-cell class="white-space-pre-line" *matCellDef="let obj">{{obj.productName + "\n" + obj.note}}</mat-cell>
+      <mat-cell class="white-space-pre-line" *matCellDef="let obj">
+        {{obj.productName}}
+        {{"\n" + obj.note}}
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
