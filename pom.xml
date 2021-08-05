@@ -15,6 +15,7 @@
     <artifactId>clinic</artifactId>
     <version>1.0</version>
 
+    <name>Clinic Main Project</name>
     <packaging>pom</packaging>
     <description>Clinic Project</description>
     <modules>

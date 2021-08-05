@@ -90,7 +90,7 @@ export class OrderDetailComponent implements OnInit {
 
   edit(obj?: OrderItem) {
     const dialogRef = this.dialog.open(OrderItemDialogComponent, {
-      width: '880px',
+      width: '660px',
       height: '300px',
       data: obj
     });
