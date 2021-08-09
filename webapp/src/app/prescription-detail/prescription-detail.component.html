@@ -1,0 +1,54 @@
+<h2>
+  Thêm/sửa đơn thuốc:
+</h2>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <mat-form-field style="width:50vw">
+    <input formControlName="client" matInput placeholder="Họ tên bệnh nhân">
+    <!-- error -->
+    <mat-error *ngIf="errorHandling('client', 'required')">
+      Nhập họ tên bệnh nhân
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field style="width:50vw">
+    <input formControlName="address" matInput placeholder="Địa chỉ">
+  </mat-form-field>
+
+  <div class="m-top-1"><b>Chỉ định thuốc:</b></div>
+  <mat-table #table [dataSource]="indicationDataSource">
+
+    <ng-container matColumnDef="seqNo">
+      <mat-header-cell *matHeaderCellDef><b>STT</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj">{{obj.seqNo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="drug">
+      <mat-header-cell *matHeaderCellDef><b>Tên thuốc</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj">{{obj.drug.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="note">
+      <mat-header-cell *matHeaderCellDef><b>Cách dùng</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj">{{obj.note}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let obj">
+        <button (click)="edit(obj)" color="primary" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="indicationDisplayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: indicationDisplayedColumns"></mat-row>
+  </mat-table>
+</form>
+
+
+<div class="m-top-1">
+  <button (click)="edit()" color="primary" mat-flat-button>Thêm thuốc</button>
+  <button (click)="onSubmit()" class="m-left-1" color="primary" mat-flat-button>Lưu đơn</button>
+  <button (click)="navigateToList()" class="m-left-1" color="warn" mat-flat-button>Danh sách đơn thuốc</button>
+</div>

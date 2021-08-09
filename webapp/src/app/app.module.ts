@@ -9,9 +9,9 @@ import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {MatDividerModule} from "@angular/material/divider";
 import {MatMenuModule} from "@angular/material/menu";
-import {ProductListComponent} from './product-list/product-list.component';
-import {ProductDetailComponent} from './product-detail/product-detail.component';
-import {OrderDetailComponent} from './order-detail/order-detail.component';
+import {DrugListComponent} from './drug-list/drug-list.component';
+import {DrugDetailComponent} from './drug-detail/drug-detail.component';
+import {PrescriptionDetailComponent} from './prescription-detail/prescription-detail.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
@@ -23,28 +23,30 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {TableFilterComponent} from './table-filter/table-filter.component';
 import {MatGridListModule} from "@angular/material/grid-list";
-import {OrderItemDialogComponent} from './order-item-dialog/order-item-dialog.component';
+import {IndicationDialogComponent} from './indication-dialog/indication-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {OrderListComponent} from './order-list/order-list.component';
+import {PrescriptionListComponent} from './prescription-list/prescription-list.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {NgxPrintModule} from "ngx-print";
-import {OrderPrintComponent} from './order-print/order-print.component';
+import { DictionaryComponent } from './dictionary/dictionary.component';
+import { PatientListComponent } from './patient-list/patient-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ProductListComponent,
-    ProductDetailComponent,
-    OrderDetailComponent,
+    DrugListComponent,
+    DrugDetailComponent,
+    PrescriptionDetailComponent,
     TableFilterComponent,
-    OrderItemDialogComponent,
-    OrderListComponent,
-    OrderPrintComponent,
+    IndicationDialogComponent,
+    PrescriptionListComponent,
+    DictionaryComponent,
+    PatientListComponent,
   ],
   imports: [
     BrowserModule,

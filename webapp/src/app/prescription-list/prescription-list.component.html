@@ -1,0 +1,45 @@
+<h2>Danh sách đơn thuốc</h2>
+<app-table-filter [filter]="searchModel" (change)="onFilterChanged()" ></app-table-filter>
+<mat-table #table
+           (matSortChange)="sortData($event)"
+           [dataSource]="dataSource"
+           matSort>
+
+  <ng-container matColumnDef="createDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Ngày</b></mat-header-cell>
+    <mat-cell *matCellDef="let obj">{{obj.createDate | date : 'dd/MM/yyyy'}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="client">
+    <mat-header-cell *matHeaderCellDef><b>Bệnh nhân</b></mat-header-cell>
+    <mat-cell *matCellDef="let obj">{{getPatientName(obj)}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Địa chỉ</b></mat-header-cell>
+    <mat-cell *matCellDef="let obj">{{getPatientAddress(obj)}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let obj">
+      <button (click)="edit(obj)" color="primary" mat-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+<div *ngIf="totalElements < 1" class="text-center m-top-1">Không có dữ liệu</div>
+<mat-paginator
+  (page)="pageChange($event)"
+  [length]="totalElements"
+  [pageIndex]="0"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="pageSizeOptions[0]"
+></mat-paginator>
+<div class="m-top-1">
+  <button (click)="add()" color="primary" mat-raised-button>Thêm</button>
+</div>

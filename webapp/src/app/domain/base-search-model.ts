@@ -1,8 +1,11 @@
+import {ListItem} from "./list-item";
+
 export class SearchField {
   constructor(public label: string,
               public type: string,
               public name: string,
-              public value: any) {
+              public value: any,
+              public options?: ListItem[]) {
   }
 }
 

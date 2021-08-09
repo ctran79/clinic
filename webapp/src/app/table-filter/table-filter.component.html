@@ -1,5 +1,5 @@
 <mat-grid-list
-  [cols]="filter.fields.length"
+  [cols]="12"
   rowHeight="60px">
 
   <mat-grid-tile *ngFor="let item of filter.fields; let i = index" [colspan]="1"
@@ -13,6 +13,14 @@
              matInput type="text"/>
       <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="item.type === 'boolean'" class="filter-field">
+      <mat-radio-group aria-label="Chọn">
+        <mat-radio-button value="true">item.name1</mat-radio-button>
+        <mat-radio-button value="false">item.name2</mat-radio-button>
+      </mat-radio-group>
+      <input [(ngModel)]="item.value" [placeholder]="'Chọn ' + item.label" matInput type="text"/>
     </mat-form-field>
   </mat-grid-tile>
 </mat-grid-list>

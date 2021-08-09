@@ -1,8 +1,8 @@
 <div class='header'>
-  <button [matMenuTriggerFor]='orderMenu' mat-button>Đơn thuốc</button>
+  <button [matMenuTriggerFor]='orderMenu' mat-button>Khám bệnh</button>
   <mat-menu #orderMenu='matMenu' yPosition='below'>
-    <button mat-menu-item routerLink='/order-detail'>Kê đơn</button>
-    <button mat-menu-item routerLink='/order-list'>Danh sách</button>
+    <button mat-menu-item routerLink='/patient-list'>Danh sách bệnh nhân</button>
   </mat-menu>
-  <button mat-button routerLink='/product-list'>Danh sách thuốc</button>
+  <button mat-button routerLink='/drug-list'>Danh sách thuốc</button>
+  <button mat-button routerLink='/dictionary'>Từ điển</button>
 </div>

@@ -1,11 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {CrudService} from "./service/crud.service";
 import {BaseObject} from "./domain/base-object";
-import {CollectionViewer, DataSource} from "@angular/cdk/collections";
-import {BehaviorSubject, Observable} from "rxjs";
 import {BaseSearchModel} from "./domain/base-search-model";
 import {PageEvent} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {Sort} from "@angular/material/sort/sort";
 

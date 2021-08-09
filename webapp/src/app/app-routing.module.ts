@@ -1,31 +1,36 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {OrderDetailComponent} from "./order-detail/order-detail.component";
-import {ProductListComponent} from "./product-list/product-list.component";
-import {ProductDetailComponent} from "./product-detail/product-detail.component";
-import {OrderListComponent} from "./order-list/order-list.component";
+import {PrescriptionDetailComponent} from "./prescription-detail/prescription-detail.component";
+import {DrugListComponent} from "./drug-list/drug-list.component";
+import {DrugDetailComponent} from "./drug-detail/drug-detail.component";
+import {PrescriptionListComponent} from "./prescription-list/prescription-list.component";
+import {DictionaryComponent} from "./dictionary/dictionary.component";
+import {PatientListComponent} from "./patient-list/patient-list.component";
 
 const routes: Routes = [
   {
-    path: 'order-detail', component: OrderDetailComponent
+    path: 'dictionary', component: DictionaryComponent
   },
   {
-    path: 'order-detail/:id', component: OrderDetailComponent
+    path: 'prescription-detail', component: PrescriptionDetailComponent
   },
   {
-    path: 'order-list', component: OrderListComponent
+    path: 'prescription-detail/:id', component: PrescriptionDetailComponent
   },
   {
-    path: 'product-detail', component: ProductDetailComponent
+    path: 'patient-list', component: PatientListComponent
   },
   {
-    path: 'product-detail/:id', component: ProductDetailComponent
+    path: 'drug-detail', component: DrugDetailComponent
   },
   {
-    path: 'product-list', component: ProductListComponent
+    path: 'drug-detail/:id', component: DrugDetailComponent
   },
   {
-    path: '', redirectTo: '/order-list', pathMatch: 'full'
+    path: 'drug-list', component: DrugListComponent
+  },
+  {
+    path: '', redirectTo: '/patient-list', pathMatch: 'full'
   }
 ];
 

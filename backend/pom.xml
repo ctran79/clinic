@@ -13,9 +13,18 @@
     <version>1.0</version>
     <name>backend</name>
     <description>Clinic backend</description>
-    <properties>
-        <java.version>11</java.version>
-    </properties>
+
+    <repositories>
+        <repository>
+            <id>jasperreports</id>
+            <url>http://jasperreports.sourceforge.net/maven2</url>
+        </repository>
+        <repository>
+            <id>jaspersoft-third-party</id>
+            <url>http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,11 +42,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>2.4.7</version>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -64,6 +68,7 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -136,6 +141,31 @@
                     <testTarget>8</testTarget>
                     <showDeprecation>true</showDeprecation>
                     <compilerArgument>-Xlint:unchecked</compilerArgument>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.alexnederlof</groupId>
+                <artifactId>jasperreports-plugin</artifactId>
+                <version>2.8</version>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>jasper</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- These are the default configurations: -->
+                    <compiler>net.sf.jasperreports.engine.design.JRJdtCompiler</compiler>
+                    <sourceDirectory>src/main/resources/reports</sourceDirectory>
+                    <outputDirectory>${project.build.directory}/jasper</outputDirectory>
+                    <outputFileExt>.jasper</outputFileExt>
+                    <xmlValidation>true</xmlValidation>
+                    <verbose>false</verbose>
+                    <numberOfThreads>4</numberOfThreads>
+                    <failOnMissingSourceDirectory>true</failOnMissingSourceDirectory>
+                    <sourceScanner>org.codehaus.plexus.compiler.util.scan.StaleSourceScanner</sourceScanner>
                 </configuration>
             </plugin>
         </plugins>
