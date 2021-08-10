@@ -2,6 +2,7 @@ package com.ctran79.clinic.backend.service.dictionary;
 
 import com.ctran79.clinic.backend.domain.dictionary.Dictionary;
 import com.ctran79.clinic.backend.service.BaseCrudService;
+import com.ctran79.clinic.backend.specification.DictionarySpecification;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Map;
@@ -17,6 +18,6 @@ public class DictionaryService extends BaseCrudService<Dictionary> {
 
   @Override
   protected Specification buildSpecification(Map<String, String> params) {
-    throw new UnsupportedOperationException();
+    return DictionarySpecification.buildSpecification(params);
   }
 }

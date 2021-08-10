@@ -1,6 +1,8 @@
 package com.ctran79.clinic.backend.specification;
 
+import com.ctran79.clinic.backend.domain.patient.Patient;
 import com.ctran79.clinic.backend.domain.patient.Patient_;
+import com.ctran79.clinic.backend.domain.prescription.Prescription;
 import com.ctran79.clinic.backend.domain.prescription.Prescription_;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /** @author ctran79 */
-public class PatientSpecification extends BaseSpecification {
+public class PatientSpecification extends BaseSpecification<Patient> {
   public static final String CREATE_DATE_FROM = "createDateFrom";
   public static final String CREATE_DATE_TO = "createDateTo";
   public static final String ALL_PATIENT = "allPatient";

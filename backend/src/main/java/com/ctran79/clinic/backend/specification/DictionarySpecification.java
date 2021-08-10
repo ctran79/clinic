@@ -1,6 +1,6 @@
 package com.ctran79.clinic.backend.specification;
 
-import com.ctran79.clinic.backend.domain.drug.Drug;
+import com.ctran79.clinic.backend.domain.dictionary.Dictionary;
 import com.ctran79.clinic.backend.domain.drug.Drug_;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /** @author ctran79 */
-public class DrugSpecification extends BaseSpecification<Drug> {
+public class DictionarySpecification extends BaseSpecification<Dictionary> {
   public static Specification buildSpecification(Map<String, String> params) {
     return (root, criteriaQuery, criteriaBuilder) -> {
       List<Predicate> predicates = new ArrayList<>();

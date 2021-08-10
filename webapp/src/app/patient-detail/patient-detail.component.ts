@@ -8,6 +8,7 @@ import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from "rxj
 import {DrugSearchModel} from "../domain/drug-search-model";
 import {PatientService} from "../service/patient.service";
 import {Patient} from "../domain/patient";
+import {ListItem} from "../domain/list-item";
 
 @Component({
   selector: 'app-patient-detail',
@@ -19,6 +20,7 @@ export class PatientDetailComponent implements OnInit {
   form!: FormGroup;
   patient!: Patient;
   id: number = this.activatedRoute.snapshot.params.id;
+  genderDict: ListItem[] = [];
 
   constructor(public formBuilder: FormBuilder,
               public router: Router,

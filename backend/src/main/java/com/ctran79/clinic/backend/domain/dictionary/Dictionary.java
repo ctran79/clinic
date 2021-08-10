@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** @author ctran79 */
 @Entity
@@ -26,6 +27,12 @@ public class Dictionary extends BaseEntity {
   private List<DictionaryValue> dictionaryValues = new ArrayList<>();
 
   public DictionaryDto toDto() {
-    return DictionaryDto.builder().id(id).code(code).name(name).build();
+    return DictionaryDto.builder()
+        .id(id)
+        .code(code)
+        .name(name)
+        .dictionaryValues(
+            dictionaryValues.stream().map(DictionaryValue::toDto).collect(Collectors.toList()))
+        .build();
   }
 }

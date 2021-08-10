@@ -30,7 +30,6 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {PrescriptionListComponent} from './prescription-list/prescription-list.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
-import {NgxPrintModule} from "ngx-print";
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { PatientAgePipe } from './pipeline/patient-age.pipe';
@@ -76,7 +75,6 @@ import { PatientDetailComponent } from './patient-detail/patient-detail.componen
         MatSelectModule,
         MatAutocompleteModule,
         MatDatepickerModule,
-        NgxPrintModule,
         MatRadioModule
     ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
