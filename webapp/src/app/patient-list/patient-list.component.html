@@ -1,5 +1,5 @@
 <h2>Danh sách bệnh nhân</h2>
-<app-table-filter [filter]="searchModel" (change)="onFilterChanged()" ></app-table-filter>
+<app-table-filter [filter]="searchModel" (change)="onFilterChanged()"></app-table-filter>
 <mat-table #table
            (matSortChange)="sortData($event)"
            [dataSource]="dataSource"
@@ -16,18 +16,18 @@
   </ng-container>
 
   <ng-container matColumnDef="age">
-    <mat-header-cell *matHeaderCellDef><b>Bệnh nhân</b></mat-header-cell>
-    <mat-cell *matCellDef="let obj">{{getPatientAge(obj)}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef><b>Tuổi</b></mat-header-cell>
+    <mat-cell *matCellDef="let obj">{{obj | patientAge}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef><b>Bệnh nhân</b></mat-header-cell>
-    <mat-cell *matCellDef="let obj">{{getPatientName(obj)}}</mat-cell>
+    <mat-cell *matCellDef="let obj">{{obj.name}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="address">
     <mat-header-cell *matHeaderCellDef mat-sort-header><b>Địa chỉ</b></mat-header-cell>
-    <mat-cell *matCellDef="let obj">{{getPatientAddress(obj)}}</mat-cell>
+    <mat-cell *matCellDef="let obj">{{obj.address}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="actions">

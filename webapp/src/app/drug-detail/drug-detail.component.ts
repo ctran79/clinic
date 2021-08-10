@@ -15,9 +15,9 @@ import {DrugSearchModel} from "../domain/drug-search-model";
 export class DrugDetailComponent implements OnInit {
 
   form!: FormGroup;
-  product!: Drug;
+  drug!: Drug;
   id: number = this.activatedRoute.snapshot.params.id;
-  filteredProducts!: Observable<Drug[]>
+  filteredDrugs!: Observable<Drug[]>
 
   constructor(public formBuilder: FormBuilder,
               public router: Router,
@@ -28,7 +28,7 @@ export class DrugDetailComponent implements OnInit {
   ngOnInit(): void {
     this.createFormView();
     this.getData();
-    this.filteredProducts = this.getControl('name').valueChanges
+    this.filteredDrugs = this.getControl('name').valueChanges
       .pipe(
         startWith(''),
         debounceTime(400),
@@ -72,12 +72,12 @@ export class DrugDetailComponent implements OnInit {
   }
 
   createObject() {
-    this.product = {
+    this.drug = {
       id: this.id,
       name: this.getControl('name').value,
       usage: this.getControl('usage').value,
     };
-    return this.product;
+    return this.drug;
   }
 
   getData() {
@@ -87,7 +87,7 @@ export class DrugDetailComponent implements OnInit {
   }
 
   patchFormValue(drug: Drug) {
-    this.product = drug;
+    this.drug = drug;
     this.form.patchValue({
       name: drug.name,
       usage: drug.usage

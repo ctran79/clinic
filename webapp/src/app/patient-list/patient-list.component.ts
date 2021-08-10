@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {TableBase} from "../table-base";
-import {Prescription} from "../domain/prescription";
 import {PatientSearchModel} from "../domain/patient-search-model";
 import {BaseSearchModel} from "../domain/base-search-model";
 import {PatientService} from "../service/patient.service";
 import {Patient} from "../domain/patient";
+import {Router} from "@angular/router";
+import {BaseObject} from "../domain/base-object";
 
 @Component({
   selector: 'app-patient-list',
@@ -13,7 +14,10 @@ import {Patient} from "../domain/patient";
 })
 export class PatientListComponent extends TableBase<Patient> {
 
-  constructor(public patientService: PatientService) {
+  displayedColumns: string[] = ['createDate', 'isExamined', 'age', 'name', 'address', 'actions'];
+
+  constructor(public router: Router,
+              public patientService: PatientService) {
     super(patientService);
   }
 
@@ -24,16 +28,15 @@ export class PatientListComponent extends TableBase<Patient> {
     return new PatientSearchModel();
   }
 
-  patientIsExamined(patient: Patient){
-    return patient.isExamined ? 'Đã khám': 'Chưa khám';
+  patientIsExamined(patient: Patient): string {
+    return patient.isExamined ? 'Đã khám' : 'Chưa khám';
   }
 
-  getPatientAge(patient: Patient) {
-    const birthday = new Date(patient.birthday);
-    const examDate = new Date(patient.createDate);
-    const diffTime = Math.abs(examDate.getTime() - birthday.getTime());
-    const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
+  async edit(obj: BaseObject): Promise<void> {
+    await this.router.navigate([`/patient-detail/${obj.id}`]);
+  }
 
-    return diffMonths <= 72 ? diffMonths + ' tháng' : Math.ceil((diffMonths - 1) / 12 + 1) + ' tuổi';
+  async add(): Promise<void> {
+    await this.router.navigate(['/patient-detail']);
   }
 }

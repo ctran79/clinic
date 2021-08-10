@@ -33,6 +33,9 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {NgxPrintModule} from "ngx-print";
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
+import { PatientAgePipe } from './pipeline/patient-age.pipe';
+import {MatRadioModule} from "@angular/material/radio";
+import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,32 +50,35 @@ import { PatientListComponent } from './patient-list/patient-list.component';
     PrescriptionListComponent,
     DictionaryComponent,
     PatientListComponent,
+    PatientAgePipe,
+    PatientDetailComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatDialogModule,
-    MatNativeDateModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    HttpClientModule,
-    MatTableModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatSortModule,
-    FormsModule,
-    MatGridListModule,
-    MatSelectModule,
-    MatAutocompleteModule,
-    MatDatepickerModule,
-    NgxPrintModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatDialogModule,
+        MatNativeDateModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        HttpClientModule,
+        MatTableModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatSortModule,
+        FormsModule,
+        MatGridListModule,
+        MatSelectModule,
+        MatAutocompleteModule,
+        MatDatepickerModule,
+        NgxPrintModule,
+        MatRadioModule
+    ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]
 })

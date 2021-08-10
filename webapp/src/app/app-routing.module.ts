@@ -6,6 +6,7 @@ import {DrugDetailComponent} from "./drug-detail/drug-detail.component";
 import {PrescriptionListComponent} from "./prescription-list/prescription-list.component";
 import {DictionaryComponent} from "./dictionary/dictionary.component";
 import {PatientListComponent} from "./patient-list/patient-list.component";
+import {PatientDetailComponent} from "./patient-detail/patient-detail.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
   },
   {
     path: 'patient-list', component: PatientListComponent
+  },
+  {
+    path: 'patient-detail', component: PatientDetailComponent
   },
   {
     path: 'drug-detail', component: DrugDetailComponent

@@ -1,0 +1,23 @@
+<h2>
+  Thêm/sửa bệnh nhân:
+</h2>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <mat-form-field style="width:50vw">
+    <mat-label>Tên bệnh nhân</mat-label>
+    <input type="text" matInput [formControl]="getControl('name')">
+    <!-- error -->
+    <mat-error *ngIf="errorHandling('name', 'required')">
+      Nhập tên bệnh nhân
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field style="width:50vw">
+    <input [matDatepicker]="picker" [placeholder]="'Ngày tháng năm sinh'" matInput formControlName="birthday"
+           type="text"/>
+    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <div>
+    <button color="primary" mat-flat-button>Lưu</button>
+    <button color="warn" class="m-left-1" mat-flat-button>Danh sách thuốc</button>
+  </div>
+</form>

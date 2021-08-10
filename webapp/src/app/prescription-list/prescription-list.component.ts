@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {PrescriptionService} from "../service/prescription.service";
 import {Prescription} from "../domain/prescription";
 import {PrescriptionSearchModel} from "../domain/prescription-search-model";
+import {BaseObject} from "../domain/base-object";
 
 @Component({
   selector: 'app-prescription-list',
@@ -26,7 +27,7 @@ export class PrescriptionListComponent extends TableBase<Prescription> {
     return new PrescriptionSearchModel();
   }
 
-  async edit(obj: Prescription) {
+  async edit(obj: BaseObject) {
     await this.router.navigate([`/prescription-detail/${obj.id}`]);
   }
 
@@ -40,14 +41,5 @@ export class PrescriptionListComponent extends TableBase<Prescription> {
 
   getPatientAddress(prescription: Prescription): string {
     return prescription.patient.address;
-  }
-
-  getPatientAge(prescription: Prescription): string {
-    const birthday = new Date(prescription.patient.birthday);
-    const examDate = new Date(prescription.patient.createDate);
-    const diffTime = Math.abs(examDate.getTime() - birthday.getTime());
-    const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
-
-    return diffMonths <= 72 ? diffMonths + ' tháng' : Math.ceil((diffMonths - 1) / 12 + 1) + ' tuổi';
   }
 }
