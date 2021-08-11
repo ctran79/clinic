@@ -19,18 +19,3 @@ table {
   white-space: unset !important;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.m-top-1 {
-  margin-top: 1%;
-}
-
-.m-left-1 {
-  margin-left: 1% !important;
-}
-
-#print-section {
-  display: none;
-}

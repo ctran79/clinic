@@ -35,6 +35,7 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { PatientAgePipe } from './pipeline/patient-age.pipe';
 import {MatRadioModule} from "@angular/material/radio";
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
+import { DictionaryValueListComponent } from './dictionary-value-list/dictionary-value-list.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { PatientDetailComponent } from './patient-detail/patient-detail.componen
     PatientListComponent,
     PatientAgePipe,
     PatientDetailComponent,
+    DictionaryValueListComponent,
   ],
     imports: [
         BrowserModule,

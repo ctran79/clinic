@@ -40,6 +40,10 @@ export abstract class CrudService<T extends BaseObject> {
     return this.http.get<T>(`${this.api}/${id}`);
   }
 
+  public getAllModel() : Observable<T[]> {
+    return this.http.get<T[]>(`${this.api}/all`);
+  }
+
   protected abstract getEndpoint(): string;
 
   private buildSearchParams(searchModel: BaseSearchModel) {

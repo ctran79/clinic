@@ -14,6 +14,8 @@ export class DictService extends CrudService<Dictionary> {
   }
 
   protected getEndpoint(): string {
-    return "dict";
+    return "dictionary";
   }
+
+
 }

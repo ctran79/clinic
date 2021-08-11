@@ -6,6 +6,7 @@ import com.ctran79.clinic.backend.facade.BaseCrudFacade;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +25,12 @@ public abstract class BaseCrudController<E extends BaseEntity, D> {
     public D getById(@PathVariable Long id) {
         D obj = facade.getById(id);
         return obj;
+    }
+
+    @GetMapping(path = "/all")
+    public List<D> getAll() {
+        List<D> list = facade.getAll();
+        return list;
     }
 
     @PostMapping(path = "")
