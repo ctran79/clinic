@@ -5,15 +5,6 @@ html, body {
   padding: 0;
 }
 
-table {
-  width: 100%;
-}
-
-.filter-field {
-  width: 100%;
-  margin-right: 10%;
-}
-
 .mat-column-actions {
   flex: 0 0 120px !important;
   white-space: unset !important;

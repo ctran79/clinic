@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Table(name = "prescriptions")
 public class Prescription extends BaseEntity {
   @NotNull
-  @JoinColumn(name = "dictionary_id")
+  @JoinColumn(name = "patient_id")
   @OneToOne
   private Patient patient;
 

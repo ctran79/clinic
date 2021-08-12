@@ -1,39 +1,52 @@
-<mat-table #table
-           (matSortChange)="sortData($event)"
-           [dataSource]="dataSource"
-           matSort>
+<ng-container *ngIf="!editDictValue">
+  <mat-table #table
+             (matSortChange)="sortData($event)"
+             [dataSource]="dataSource"
+             matSort>
 
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Tên thuốc</b></mat-header-cell>
-    <mat-cell *matCellDef="let obj">{{obj.name}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header><b>Tên</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj">{{obj.value}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="note">
-    <mat-header-cell *matHeaderCellDef><b>Cách dùng</b></mat-header-cell>
-    <mat-cell *matCellDef="let obj">{{obj.usage}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef><b>Code</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj">{{obj.code}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let obj">
-      <button (click)="edit(obj)" color="primary" mat-button>
-        <mat-icon>edit</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let obj">
+        <button (click)="edit(obj)" color="primary" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-</mat-table>
-<div *ngIf="totalElements < 1" class="text-center m-top-1">Không có dữ liệu</div>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
 
-<mat-paginator
-  (page)="pageChange($event)"
-  [length]="totalElements"
-  [pageIndex]="0"
-  [pageSizeOptions]="pageSizeOptions"
-  [pageSize]="pageSizeOptions[0]"
-></mat-paginator>
-<div class="m-top-1">
-  <button (click)="add()" color="primary" mat-raised-button>Thêm</button>
-</div>
+  <div class="mt-3">
+    <button (click)="add()" color="primary" mat-raised-button>Thêm</button>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="editDictValue">
+  <h2>
+    Thêm/sửa từ điển:
+  </h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <mat-form-field class="w-50">
+      <mat-label>Tên</mat-label>
+      <input type="text" matInput [formControl]="getControl('value')">
+    </mat-form-field>
+    <mat-form-field class="w-50">
+      <input formControlName="code" matInput placeholder="Code">
+    </mat-form-field>
+    <div>
+      <button color="primary" mat-flat-button>Lưu</button>
+      <button color="warn" class="p-3" mat-flat-button></button>
+    </div>
+  </form>
+</ng-container>
