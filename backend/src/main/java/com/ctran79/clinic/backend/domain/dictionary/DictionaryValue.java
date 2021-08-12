@@ -27,4 +27,10 @@ public class DictionaryValue extends BaseEntity {
   public DictionaryValueDto toDto() {
     return DictionaryValueDto.builder().id(id).code(code).value(value).build();
   }
+
+  public DictionaryValue toEntity(DictionaryValueDto dto) {
+    code = dto.getCode();
+    value = dto.getValue();
+    return this;
+  }
 }

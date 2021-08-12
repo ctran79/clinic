@@ -35,4 +35,15 @@ public class Dictionary extends BaseEntity {
             dictionaryValues.stream().map(DictionaryValue::toDto).collect(Collectors.toList()))
         .build();
   }
+
+  public Dictionary toEntity(DictionaryDto dto) {
+    code = dto.getCode();
+    name = dto.getName();
+    return this;
+  }
+
+  public void addDictionaryValue(DictionaryValue dictValue) {
+    dictValue.setDictionary(this);
+    this.dictionaryValues.add(dictValue);
+  }
 }

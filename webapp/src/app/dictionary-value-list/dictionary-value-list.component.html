@@ -37,16 +37,16 @@
     Thêm/sửa từ điển:
   </h2>
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <mat-form-field class="w-50">
+    <mat-form-field class="w-100">
       <mat-label>Tên</mat-label>
       <input type="text" matInput [formControl]="getControl('value')">
     </mat-form-field>
-    <mat-form-field class="w-50">
+    <mat-form-field class="w-100">
       <input formControlName="code" matInput placeholder="Code">
     </mat-form-field>
     <div>
       <button color="primary" mat-flat-button>Lưu</button>
-      <button color="warn" class="p-3" mat-flat-button></button>
+      <button color="warn" class="me-2" mat-flat-button>Quay lại danh sách</button>
     </div>
   </form>
 </ng-container>

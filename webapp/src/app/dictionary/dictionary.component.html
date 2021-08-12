@@ -1,13 +1,12 @@
 <div class="d-inline-flex">
-  <mat-form-field appearance="outline"
-                  class="p-2">
+  <mat-form-field appearance="outline" class="p-2">
     <mat-label><strong>Chọn từ điển</strong></mat-label>
     <mat-select (valueChange)="onChangeDictionary($event)">
       <mat-option *ngFor="let dict of dictList"
                   [value]="dict.id">{{dict.name}}
       </mat-option>
     </mat-select>
-   </mat-form-field>
+  </mat-form-field>
 </div>
 
-<app-dictionary-value-list *ngIf="selectedDict" [dictionary]="selectedDict"></app-dictionary-value-list>
+<app-dictionary-value-list *ngIf="selectedDict" [dictionary]="selectedDict" (onAddOrEditDictValue)="saveDictionary($event)"></app-dictionary-value-list>

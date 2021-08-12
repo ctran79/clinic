@@ -28,5 +28,9 @@ export class DictionaryComponent implements OnInit {
       this.dictList = result;
     });
   }
+
+  saveDictionary(dictionary: Dictionary) {
+    this.dictService.saveModel(dictionary).subscribe();
+  }
 }
 

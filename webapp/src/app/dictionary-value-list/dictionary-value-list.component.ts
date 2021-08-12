@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TableBase} from "../table-base";
 import {Dictionary} from "../domain/dictionary";
 import {DictionarySearchModel} from "../domain/dict-search-model";
@@ -18,13 +18,20 @@ export class DictionaryValueListComponent extends TableBase<DictionaryValue> {
   editDictValue: boolean = false;
   form!: FormGroup;
 
+  @Output()
+  onAddOrEditDictValue = new EventEmitter<Dictionary>();
+
   constructor(public formBuilder: FormBuilder,
               public dictService: DictValueService) {
     super(dictService);
   }
 
+  _dictionary!: Dictionary;
+
   @Input()
   set dictionary(dict: Dictionary) {
+    this._dictionary = dict;
+    this.editDictValue = false;
     this.dataSource = new MatTableDataSource(dict.dictionaryValues);
   }
 
@@ -38,17 +45,25 @@ export class DictionaryValueListComponent extends TableBase<DictionaryValue> {
 
   edit(dictValue: DictionaryValue) {
     this.editDictValue = true;
-    this.form.patchValue({
-      value: dictValue.value,
-      code: dictValue.code
-    });
+    this.form.patchValue(dictValue);
   }
 
   add() {
+    this.editDictValue = true;
   }
 
   onSubmit() {
-    this.editDictValue = false;
+    if (this.form.valid) {
+      const dictionaryValue = this.createObject();
+      const index = this._dictionary.dictionaryValues.findIndex(value => value.id === dictionaryValue.id);
+      if (index >= 0) {
+        this._dictionary.dictionaryValues[index] = dictionaryValue;
+      } else {
+        this._dictionary.dictionaryValues.push(dictionaryValue);
+      }
+      this.onAddOrEditDictValue.emit(this._dictionary);
+      this.editDictValue = false;
+    }
   }
 
   getControl(name: string): FormControl {
@@ -57,8 +72,13 @@ export class DictionaryValueListComponent extends TableBase<DictionaryValue> {
 
   private createEditDictValueForm() {
     this.form = this.formBuilder.group({
+      id: [null],
       value: ['', Validators.required],
       code: ['']
     });
+  }
+
+  private createObject(): DictionaryValue {
+    return this.form.value;
   }
 }
