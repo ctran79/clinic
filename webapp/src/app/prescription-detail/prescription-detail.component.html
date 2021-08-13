@@ -3,39 +3,37 @@
 </h2>
 
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <mat-form-field style="width:50vw">
-    <input formControlName="client" matInput placeholder="Họ tên bệnh nhân">
-    <!-- error -->
-    <mat-error *ngIf="errorHandling('client', 'required')">
-      Nhập họ tên bệnh nhân
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field style="width:50vw">
-    <input formControlName="address" matInput placeholder="Địa chỉ">
-  </mat-form-field>
+  <mat-label>Bệnh nhân: <span>{{patient?.name}} ({{patient | patientAge}}, {{patient?.weight}}kg)  </span></mat-label>
 
-  <div class="m-top-1"><b>Chỉ định thuốc:</b></div>
+  <div class="mt-2"><h3><b>Chẩn đoán:</b></h3></div>
+  <mat-list>
+    <mat-list-item *ngFor="let diagnosis of diagnosisList">{{diagnosis.diagnosis.value}}</mat-list-item>
+  </mat-list>
+  <div class="mt-2">
+    <button color="primary" mat-flat-button (click)="addDiagnosis()">Thêm chẩn đoán</button>
+  </div>
+
+  <div class="mt-2"><h3><b>Chỉ định thuốc:</b></h3></div>
   <mat-table #table [dataSource]="indicationDataSource">
-
-    <ng-container matColumnDef="seqNo">
-      <mat-header-cell *matHeaderCellDef><b>STT</b></mat-header-cell>
-      <mat-cell *matCellDef="let obj">{{obj.seqNo}}</mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="drug">
       <mat-header-cell *matHeaderCellDef><b>Tên thuốc</b></mat-header-cell>
-      <mat-cell *matCellDef="let obj">{{obj.drug.name}}</mat-cell>
+      <mat-cell *matCellDef="let obj"><b>{{obj.drug.name}}</b><br/></mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="note">
-      <mat-header-cell *matHeaderCellDef><b>Cách dùng</b></mat-header-cell>
-      <mat-cell *matCellDef="let obj">{{obj.note}}</mat-cell>
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef><b>Số lượng</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj"><b>{{obj.quantity}}</b><br/></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Đơn vị">
+      <mat-header-cell *matHeaderCellDef><b>Đơn vị</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj">{{obj.unit.value}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let obj">
-        <button (click)="edit(obj)" color="primary" mat-button>
+        <button (click)="addDrug(obj)" color="primary" mat-button>
           <mat-icon>edit</mat-icon>
         </button>
       </mat-cell>
@@ -46,8 +44,11 @@
   </mat-table>
 </form>
 
-<div class="m-top-1">
-  <button (click)="edit()" color="primary" mat-flat-button>Thêm thuốc</button>
-  <button (click)="onSubmit()" class="m-left-1" color="primary" mat-flat-button>Lưu đơn</button>
-  <button (click)="navigateToList()" class="m-left-1" color="warn" mat-flat-button>Danh sách đơn thuốc</button>
+<div class="mt-2">
+  <button (click)="addDrug()" color="primary" class="me-2" mat-flat-button>Thêm thuốc</button>
+</div>
+
+<div class="mt-2">
+  <button (click)="onSubmit()" class="me-2" color="primary" mat-flat-button>Lưu đơn</button>
+  <button (click)="navigateToList()" class="me-2" color="warn" mat-flat-button>Danh sách bệnh nhân</button>
 </div>

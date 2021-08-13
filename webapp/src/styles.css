@@ -10,3 +10,7 @@ html, body {
   white-space: unset !important;
 }
 
+.mat-column-actions .mat-button {
+  padding: 0 !important;
+  min-width: 45px !important;
+}

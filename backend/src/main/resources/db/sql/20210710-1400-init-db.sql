@@ -39,17 +39,17 @@ create table patients
     id          serial primary key,
     name        varchar(1023),
     birthday    timestamp,
-    sex_id      int8,
+    gender_id   int8,
     telephone   varchar(255),
     address     varchar(255),
     weight      int,
     height      int,
-    is_examined bit,
+    is_examined boolean,
 
     create_date timestamp default current_timestamp,
     update_date timestamp default current_timestamp,
 
-    constraint FK_patient_sex foreign key (sex_id) references dictionary_values (id)
+    constraint FK_patient_sex foreign key (gender_id) references dictionary_values (id)
 );
 
 create table prescriptions
@@ -81,7 +81,6 @@ create table indications
 (
     id              serial primary key,
     prescription_id int8 not null,
-    seq_no          int  not null,
     drug_id         int  not null,
     quantity        double precision,
     unit_id         int  not null,
@@ -120,7 +119,7 @@ from dictionaries
 where code = 'DRUG_UNIT';
 
 insert into dictionary_values(dictionary_id, code, value)
-select id, 'NAM', 'Nam'
+select id, 'KHAC', 'Khác'
 from dictionaries
 where code = 'GENDER';
 
@@ -130,6 +129,6 @@ from dictionaries
 where code = 'GENDER';
 
 insert into dictionary_values(dictionary_id, code, value)
-select id, 'KHAC', 'Khác'
+select id, 'NAM', 'Nam'
 from dictionaries
 where code = 'GENDER';

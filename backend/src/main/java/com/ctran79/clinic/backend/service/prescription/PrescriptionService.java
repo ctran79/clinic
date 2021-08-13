@@ -20,4 +20,8 @@ public class PrescriptionService extends BaseCrudService<Prescription> {
   protected Specification buildSpecification(Map<String, String> params) {
     return PrescriptionSpecification.buildSpecification(params);
   }
+
+  public Prescription getByPatientId(Long patientId) {
+    return prescriptionRepository.getByPatientId(patientId);
+  }
 }

@@ -66,9 +66,9 @@ public class PrescriptionFacade extends BaseCrudFacade<Prescription, Prescriptio
 
   private Diagnosis convertDiagnosisToEntity(DiagnosisDto dto) {
     Diagnosis diagnosis =
-            Optional.ofNullable(dto.getId())
-                    .map(diagnosisService::getById)
-                    .orElseGet(() -> new Diagnosis());
+        Optional.ofNullable(dto.getId())
+            .map(diagnosisService::getById)
+            .orElseGet(() -> new Diagnosis());
     diagnosis.setDiagnosis(dictionaryValueService.getById(dto.getDiagnosis().getId()));
     return diagnosis.toEntity(dto);
   }
@@ -81,5 +81,10 @@ public class PrescriptionFacade extends BaseCrudFacade<Prescription, Prescriptio
     indication.setDrug(drugService.getById(dto.getDrug().getId()));
     indication.setUnit(dictionaryValueService.getById(dto.getUnit().getId()));
     return indication.toEntity(dto);
+  }
+
+  public PrescriptionDto getByPatientId(Long patientId) {
+    Prescription prescription = prescriptionService.getByPatientId(patientId);
+    return prescription == null ? null : toDto(prescription);
   }
 }

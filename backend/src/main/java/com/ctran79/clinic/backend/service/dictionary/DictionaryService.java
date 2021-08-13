@@ -20,4 +20,8 @@ public class DictionaryService extends BaseCrudService<Dictionary> {
   protected Specification buildSpecification(Map<String, String> params) {
     return DictionarySpecification.buildSpecification(params);
   }
+
+  public Dictionary getDictByCode(String code) {
+    return dictionaryRepository.getByCode(code);
+  }
 }

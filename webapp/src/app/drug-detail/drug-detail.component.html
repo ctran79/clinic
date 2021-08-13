@@ -2,7 +2,7 @@
   Thêm/sửa thuốc:
 </h2>
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <mat-form-field style="width:50vw">
+  <mat-form-field class="w-100">
     <mat-label>Tên thuốc</mat-label>
     <input type="text" matInput [formControl]="getControl('name')" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
@@ -16,11 +16,11 @@
       Nhập tên thuốc
     </mat-error>
   </mat-form-field>
-  <mat-form-field style="width:50vw">
+  <mat-form-field class="w-100">
     <input formControlName="usage" matInput placeholder="Cách dùng">
   </mat-form-field>
-  <div>
-    <button color="primary" mat-flat-button>Lưu</button>
-    <button color="warn" class="m-left-1" mat-flat-button>Danh sách thuốc</button>
+  <div class="mt-2">
+    <button color="primary" class="me-2" mat-flat-button>Lưu</button>
+    <button color="warn" class="me-2" mat-flat-button>Danh sách thuốc</button>
   </div>
 </form>

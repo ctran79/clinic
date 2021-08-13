@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import {Patient} from "../domain/patient";
 
 @Pipe({
@@ -8,10 +8,14 @@ export class PatientAgePipe implements PipeTransform {
 
   transform(patient: Patient, ...args: unknown[]): string {
     const birthday = new Date(patient.birthday);
-    const examDate = patient.createDate!;
-    const diffTime = Math.abs(examDate.getTime() - birthday.getTime());
-    const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
+    const examDate = new Date(patient.createDate!);
+    let months = (examDate.getFullYear() - birthday.getFullYear()) * 12;
 
-    return diffMonths <= 72 ? diffMonths + ' tháng' : Math.ceil((diffMonths - 1) / 12 + 1) + ' tuổi';
+    months += examDate.getMonth() - birthday.getMonth();
+    if (months < 0) {
+      months = 0;
+    }
+
+    return months <= 72 ? months + ' tháng' : Math.ceil((months - 1) / 12 + 1) + ' tuổi';
   }
 }

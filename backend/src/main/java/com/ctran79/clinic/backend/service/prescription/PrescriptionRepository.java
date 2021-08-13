@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PrescriptionRepository extends BaseCrudRepository<Prescription> {
+  Prescription getByPatientId(Long patientId);
 }

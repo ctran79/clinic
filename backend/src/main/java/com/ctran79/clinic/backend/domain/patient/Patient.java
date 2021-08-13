@@ -23,9 +23,9 @@ public class Patient extends BaseEntity {
   private LocalDateTime birthday;
 
   @NotNull
-  @JoinColumn(name = "sex_id")
+  @JoinColumn(name = "gender_id")
   @ManyToOne
-  private DictionaryValue sex;
+  private DictionaryValue gender;
 
   private String telephone;
   private String address;
@@ -39,12 +39,23 @@ public class Patient extends BaseEntity {
         .createDate(createDate)
         .name(name)
         .birthday(birthday)
-        .gender(sex.toDto())
+        .gender(gender.toDto())
         .telephone(telephone)
         .address(address)
         .weight(weight)
         .height(height)
         .isExamined(isExamined)
         .build();
+  }
+
+  public Patient toEntity(PatientDto dto) {
+    name = dto.getName();
+    birthday = dto.getBirthday();
+    telephone = dto.getTelephone();
+    address = dto.getAddress();
+    weight = dto.getWeight();
+    height = dto.getHeight();
+    isExamined = dto.getIsExamined();
+    return this;
   }
 }

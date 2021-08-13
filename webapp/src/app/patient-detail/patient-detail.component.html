@@ -10,7 +10,7 @@
 
   <mat-form-field class="w-100">
     <mat-label>Địa chỉ</mat-label>
-    <input type="text" matInput [formControl]="getControl('name')">
+    <input type="text" matInput [formControl]="getControl('address')">
   </mat-form-field>
 
   <mat-form-field class="w-25">
@@ -22,9 +22,9 @@
 
   <mat-form-field class="w-25 p-3" appearance="fill">
     <mat-label>Giới tính</mat-label>
-    <mat-select [formControl]="getControl('gender')">
-      <mat-option *ngFor="let gender of genderDict" [value]="gender.value">
-        {{gender.text}}
+    <mat-select [formControl]="getControl('gender')" [compareWith]="compareFn">
+      <mat-option *ngFor="let gender of genderDict" [value]="gender">
+        {{gender.value}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -45,8 +45,10 @@
     <input type="text" matInput [formControl]="getControl('weight')">
   </mat-form-field>
 
-  <div>
-    <button color="primary" mat-flat-button>Lưu</button>
+  <mat-checkbox class="w-100" [formControl]="getControl('isExamined')">Đã khám</mat-checkbox>
+
+  <div class="mt-2">
+    <button color="primary" class="me-2" mat-flat-button>Lưu</button>
     <button color="warn" class="m-left-1" mat-flat-button>Danh sách bệnh nhân</button>
   </div>
 </form>

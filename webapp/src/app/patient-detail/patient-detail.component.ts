@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Drug} from "../domain/drug";
-import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DrugService} from "../service/drug.service";
-import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
-import {DrugSearchModel} from "../domain/drug-search-model";
 import {PatientService} from "../service/patient.service";
 import {Patient} from "../domain/patient";
-import {ListItem} from "../domain/list-item";
+import {DictionaryValue} from "../domain/dictionary-value";
+import {DictService} from "../service/dict.service";
+import {DictionaryCode} from "../domain/dictionary-code";
+import {compareFn} from "../service/utils";
 
 @Component({
   selector: 'app-patient-detail',
@@ -20,16 +18,19 @@ export class PatientDetailComponent implements OnInit {
   form!: FormGroup;
   patient!: Patient;
   id: number = this.activatedRoute.snapshot.params.id;
-  genderDict: ListItem[] = [];
+  genderDict: DictionaryValue[] = [];
+  compareFn =  compareFn;
 
   constructor(public formBuilder: FormBuilder,
               public router: Router,
+              public dictService: DictService,
               public activatedRoute: ActivatedRoute,
               public patientService: PatientService) {
   }
 
   ngOnInit(): void {
     this.createFormView();
+    this.getDictionary();
     this.getData();
   }
 
@@ -37,12 +38,12 @@ export class PatientDetailComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       birthday: ['', Validators.required],
-      gender: [''],
+      gender: ['', Validators.required],
       telephone: [''],
       address: [''],
       weight: [0],
       height: [0],
-      isExamined: []
+      isExamined: [false]
     });
   }
 
@@ -61,7 +62,7 @@ export class PatientDetailComponent implements OnInit {
     return this.form.controls[name] as FormControl;
   }
 
-  createObject() : Patient {
+  createObject(): Patient {
     this.patient = {
       id: this.id,
       name: this.getControl('name').value,
@@ -73,7 +74,7 @@ export class PatientDetailComponent implements OnInit {
       height: this.getControl('height').value,
       isExamined: this.getControl('isExamined').value,
     };
-    return this.patient ;
+    return this.patient;
   }
 
   getData() {
@@ -82,13 +83,18 @@ export class PatientDetailComponent implements OnInit {
     }
   }
 
-  patchFormValue(drug: Patient) {
-    this.patient = drug;
-    this.form.patchValue({
-    });
+  patchFormValue(patient: Patient) {
+    this.patient = patient;
+    this.form.patchValue(patient);
   }
 
   async navigateToList() {
     await this.router.navigate(['/patient-list']);
+  }
+
+  private getDictionary() {
+    this.dictService.getDictByCode(DictionaryCode.GENDER).subscribe(dictionary => {
+      this.genderDict = dictionary.dictionaryValues;
+    });
   }
 }

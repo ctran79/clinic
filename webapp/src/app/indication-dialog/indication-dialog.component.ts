@@ -17,13 +17,13 @@ import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 export class IndicationDialogComponent implements OnInit {
 
   form!: FormGroup;
-  filteredProducts!: Observable<Drug[]>;
-  selectedProduct!: Drug;
+  filteredDrugs!: Observable<Drug[]>;
+  selectedDrug!: Drug;
 
   constructor(public dialogRef: MatDialogRef<IndicationDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Indication,
               public formBuilder: FormBuilder,
-              public productService: DrugService) {
+              public drugService: DrugService) {
   }
 
   ngOnInit(): void {
@@ -31,9 +31,9 @@ export class IndicationDialogComponent implements OnInit {
     if (this.data) {
       this.patchForm(this.data);
     }
-    this.filteredProducts = this.getControl('productName').valueChanges
+    this.filteredDrugs = this.getControl('drug').valueChanges
       .pipe(
-        startWith(this.data ? this.data.seqNo : ''),
+        startWith(this.data ? this.data.drug.name : ''),
         debounceTime(400),
         distinctUntilChanged(),
         switchMap(val => {
@@ -44,23 +44,23 @@ export class IndicationDialogComponent implements OnInit {
 
   createFormView() {
     this.form = this.formBuilder.group({
-      productId: [null, Validators.required],
-      productName: ['', Validators.required],
-      note: [],
+      drug: ['', Validators.required],
+      quantity: [1, Validators.required],
+      usage: ['', Validators.required],
     })
   }
 
   filter(val: string): Observable<Drug[]> {
-    let productSearchModel = new DrugSearchModel();
-    productSearchModel.fields.forEach(field => {
+    let drugSearchModel = new DrugSearchModel();
+    drugSearchModel.fields.forEach(field => {
       if (field.name = 'name') {
         field.value = val;
       }
     });
 
-    return this.productService.search(productSearchModel)
+    return this.drugService.search(drugSearchModel)
       .pipe(
-        map(response => response.content.filter(product => product.name.toLowerCase().indexOf(val.toLowerCase()) >= 0))
+        map(response => response.content.filter(drug => drug.name.toLowerCase().indexOf(val.toLowerCase()) >= 0))
       );
   }
 
@@ -68,27 +68,25 @@ export class IndicationDialogComponent implements OnInit {
     return this.form.controls[name] as FormControl;
   }
 
-  errorHandling(control: string, error: string) {
-    return this.getControl(control).hasError(error);
-  }
-
   patchForm(data: Indication) {
-    this.form.patchValue({
-    })
+    this.form.patchValue({})
   }
 
   selectProduct($event: MatAutocompleteSelectedEvent) {
-    this.selectedProduct = $event.option.value;
+    this.selectedDrug = $event.option.value;
     this.form.patchValue({
-    })
+      usage: this.selectedDrug.usage
+    });
   }
 
-  getProductName(product: Drug) {
-    return product ? product.name : '';
-  };
-
-  closeDialog() {
+  saveIndication() {
     if (this.form.valid) {
+      const indication = this.createIndication();
+      this.dialogRef.close(indication);
     }
+  }
+
+  private createIndication() : Indication {
+    return this.form.value;
   }
 }

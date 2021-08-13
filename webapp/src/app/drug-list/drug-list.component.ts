@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./drug-list.component.css']
 })
 export class DrugListComponent extends TableBase<Drug> {
-  displayedColumns: string[] = ['name', 'note', 'code', 'actions'];
+  displayedColumns: string[] = ['name', 'usage', 'actions'];
 
   constructor(public router: Router,
               public productService: DrugService) {

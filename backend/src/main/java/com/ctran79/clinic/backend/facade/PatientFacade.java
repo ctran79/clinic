@@ -1,29 +1,37 @@
 package com.ctran79.clinic.backend.facade;
 
-import com.ctran79.clinic.backend.domain.drug.Drug;
-import com.ctran79.clinic.backend.domain.drug.DrugDto;
 import com.ctran79.clinic.backend.domain.patient.Patient;
 import com.ctran79.clinic.backend.domain.patient.PatientDto;
-import com.ctran79.clinic.backend.service.BaseCrudService;
+import com.ctran79.clinic.backend.service.dictionary.DictionaryValueService;
 import com.ctran79.clinic.backend.service.patient.PatientService;
 
-/**
- * @author ctran79
- */
+import java.util.Optional;
 
-public class PatientFacade extends BaseCrudFacade<Patient, PatientDto>{
+/** @author ctran79 */
+public class PatientFacade extends BaseCrudFacade<Patient, PatientDto> {
 
-    public PatientFacade(PatientService service) {
-        super(service);
-    }
+  private final PatientService patientService;
+  private final DictionaryValueService dictionaryValueService;
 
-    @Override
-    public PatientDto toDto(Patient entity) {
-        return null;
-    }
+  public PatientFacade(
+      PatientService patientService, DictionaryValueService dictionaryValueService) {
+    super(patientService);
+    this.patientService = patientService;
+    this.dictionaryValueService = dictionaryValueService;
+  }
 
-    @Override
-    public Patient toEntity(PatientDto dto) {
-        return null;
-    }
+  @Override
+  public PatientDto toDto(Patient entity) {
+    return entity.toDto();
+  }
+
+  @Override
+  public Patient toEntity(PatientDto dto) {
+    Patient patient =
+        Optional.ofNullable(dto.getId())
+            .map(patientService::getById)
+            .orElseGet(() -> new Patient());
+    patient.setGender(dictionaryValueService.getById(dto.getGender().getId()));
+    return patient.toEntity(dto);
+  }
 }

@@ -2,6 +2,7 @@ package com.ctran79.clinic.backend.service.patient;
 
 import com.ctran79.clinic.backend.domain.patient.Patient;
 import com.ctran79.clinic.backend.service.BaseCrudService;
+import com.ctran79.clinic.backend.specification.PatientSpecification;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Map;
@@ -17,6 +18,6 @@ public class PatientService extends BaseCrudService<Patient> {
 
   @Override
   protected Specification buildSpecification(Map<String, String> params) {
-    throw new UnsupportedOperationException();
+    return PatientSpecification.buildSpecification(params);
   }
 }

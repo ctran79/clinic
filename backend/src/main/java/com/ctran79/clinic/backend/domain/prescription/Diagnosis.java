@@ -28,12 +28,11 @@ public class Diagnosis extends BaseEntity {
   private DictionaryValue diagnosis;
 
   public DiagnosisDto toDto() {
-    return DiagnosisDto.builder().id(id).diagnosis(diagnosis.toDto()).build();
+    return DiagnosisDto.builder().id(id).seqNo(seqNo).diagnosis(diagnosis.toDto()).build();
   }
 
   public Diagnosis toEntity(DiagnosisDto dto) {
     seqNo = dto.getSeqNo();
     return this;
   }
-
 }

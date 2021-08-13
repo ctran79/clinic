@@ -36,6 +36,9 @@ import { PatientAgePipe } from './pipeline/patient-age.pipe';
 import {MatRadioModule} from "@angular/material/radio";
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 import { DictionaryValueListComponent } from './dictionary-value-list/dictionary-value-list.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatListModule} from "@angular/material/list";
+import { DiagnosisDialogComponent } from './diagnosis-dialog/diagnosis-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,32 +56,35 @@ import { DictionaryValueListComponent } from './dictionary-value-list/dictionary
     PatientAgePipe,
     PatientDetailComponent,
     DictionaryValueListComponent,
+    DiagnosisDialogComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatDialogModule,
-        MatNativeDateModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatMenuModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        HttpClientModule,
-        MatTableModule,
-        MatButtonToggleModule,
-        MatIconModule,
-        MatPaginatorModule,
-        MatSortModule,
-        FormsModule,
-        MatGridListModule,
-        MatSelectModule,
-        MatAutocompleteModule,
-        MatDatepickerModule,
-        MatRadioModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    HttpClientModule,
+    MatTableModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatSortModule,
+    FormsModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatListModule
+  ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]
 })

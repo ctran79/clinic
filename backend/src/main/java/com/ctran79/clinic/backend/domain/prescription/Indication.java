@@ -19,8 +19,6 @@ import javax.persistence.Table;
 @Table(name = "indications")
 public class Indication extends BaseEntity {
 
-  @NotNull private Integer seqNo;
-
   @ManyToOne(optional = false)
   @JoinColumn(name = "prescription_id")
   private Prescription prescription;
@@ -40,7 +38,6 @@ public class Indication extends BaseEntity {
   public IndicationDto toDto() {
     return IndicationDto.builder()
         .id(id)
-        .seqNo(seqNo)
         .drug(drug.toDto())
         .quantity(quantity)
         .unit(unit.toDto())
@@ -49,7 +46,7 @@ public class Indication extends BaseEntity {
   }
 
   public Indication toEntity(IndicationDto dto) {
-    seqNo = dto.getSeqNo();
+    quantity = dto.getQuantity();
     usage = dto.getUsage();
     return this;
   }
