@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PatientService} from "../service/patient.service";
-import {Patient} from "../domain/patient";
-import {DictionaryValue} from "../domain/dictionary-value";
-import {DictService} from "../service/dict.service";
-import {DictionaryCode} from "../domain/dictionary-code";
-import {compareFn} from "../service/utils";
+import {PatientService} from "../../service/patient.service";
+import {Patient} from "../../domain/patient";
+import {DictionaryValue} from "../../domain/dictionary-value";
+import {DictService} from "../../service/dict.service";
+import {DictionaryCode} from "../../domain/dictionary-code";
+import {compareFn} from "../../utils/utils";
 
 @Component({
   selector: 'app-patient-detail',

@@ -24,4 +24,8 @@ public class DictionaryService extends BaseCrudService<Dictionary> {
   public Dictionary getDictByCode(String code) {
     return dictionaryRepository.getByCode(code);
   }
+
+  public Dictionary getModelByCode(String code) {
+    return dictionaryRepository.getByCode(code);
+  }
 }

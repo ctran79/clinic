@@ -54,4 +54,9 @@ public class DictionaryFacade extends BaseCrudFacade<Dictionary, DictionaryDto>{
         Dictionary dictionary = dictionaryService.getDictByCode(code);
         return toDto(dictionary);
     }
+
+    public DictionaryDto getModelByCode(String code) {
+        Dictionary dictionary = dictionaryService.getModelByCode(code);
+        return toDto(dictionary);
+    }
 }

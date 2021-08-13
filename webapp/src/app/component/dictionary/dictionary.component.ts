@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DictService} from "../service/dict.service";
-import {Dictionary} from "../domain/dictionary";
+import {DictService} from "../../service/dict.service";
+import {Dictionary} from "../../domain/dictionary";
 
 @Component({
   selector: 'app-dictionary',

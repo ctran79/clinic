@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Indication} from "../domain/indication";
+import {Indication} from "../../domain/indication";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
-import {Drug} from "../domain/drug";
-import {DrugSearchModel} from "../domain/drug-search-model";
-import {DrugService} from "../service/drug.service";
+import {Drug} from "../../domain/drug";
+import {DrugSearchModel} from "../../domain/drug-search-model";
+import {DrugService} from "../../service/drug.service";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 
 @Component({

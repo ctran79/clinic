@@ -1,5 +1,5 @@
 <h2>Danh sách thuốc</h2>
-<app-table-filter [filter]="searchModel" (change)="onFilterChanged()" ></app-table-filter>
+<app-table-filter [filter]="searchModel" (change)="onFilterChanged()"></app-table-filter>
 <mat-table #table
            (matSortChange)="sortData($event)"
            [dataSource]="dataSource"
@@ -36,6 +36,5 @@
   [pageSizeOptions]="pageSizeOptions"
   [pageSize]="pageSizeOptions[0]"
 ></mat-paginator>
-<div class="m-top-1">
-  <button (click)="add()" color="primary" mat-raised-button>Thêm</button>
-</div>
+
+<button (click)="add()" class="mt-3" color="primary" mat-raised-button>Thêm</button>

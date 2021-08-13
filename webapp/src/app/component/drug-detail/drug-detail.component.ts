@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Drug} from "../domain/drug";
+import {Drug} from "../../domain/drug";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DrugService} from "../service/drug.service";
+import {DrugService} from "../../service/drug.service";
 import {Observable} from "rxjs";
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
-import {DrugSearchModel} from "../domain/drug-search-model";
+import {DrugSearchModel} from "../../domain/drug-search-model";
 
 @Component({
   selector: 'app-drug-detail',

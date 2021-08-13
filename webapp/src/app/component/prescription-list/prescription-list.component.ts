@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {TableBase} from "../table-base";
+import {TableBase} from "../../table-base";
 import {Router} from "@angular/router";
-import {PrescriptionService} from "../service/prescription.service";
-import {Prescription} from "../domain/prescription";
-import {PrescriptionSearchModel} from "../domain/prescription-search-model";
-import {BaseObject} from "../domain/base-object";
+import {PrescriptionService} from "../../service/prescription.service";
+import {Prescription} from "../../domain/prescription";
+import {PrescriptionSearchModel} from "../../domain/prescription-search-model";
+import {BaseObject} from "../../domain/base-object";
 
 @Component({
   selector: 'app-prescription-list',
@@ -17,10 +17,6 @@ export class PrescriptionListComponent extends TableBase<Prescription> {
   constructor(public router: Router,
               public orderService: PrescriptionService) {
     super(orderService);
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
   }
 
   initSearchModel(): PrescriptionSearchModel {

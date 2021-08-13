@@ -1,0 +1,15 @@
+<ng-container *ngFor="let item of filter.fields">
+  <mat-form-field *ngIf="item.type === 'string'" class="w-25 me-3">
+    <input [(ngModel)]="item.value" [placeholder]="'Tìm theo ' + item.label" matInput type="text"/>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="item.type === 'date'" class="w-25 me-3">
+    <input (dateChange)="emit()" (dateInput)="emit()" [(ngModel)]="item.value" [matDatepicker]="picker"
+           [placeholder]="'Tìm theo ' + item.label" matInput
+           matInput type="text"/>
+    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-checkbox *ngIf="item.type === 'checkbox'" class="w-25 me-3" (change)="emit()" [(ngModel)]="item.value">{{item.label}}</mat-checkbox>
+</ng-container>

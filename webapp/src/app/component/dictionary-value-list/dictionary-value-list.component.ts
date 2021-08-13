@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {TableBase} from "../table-base";
-import {Dictionary} from "../domain/dictionary";
-import {DictionarySearchModel} from "../domain/dict-search-model";
-import {DictionaryValue} from "../domain/dictionary-value";
-import {DictValueService} from "../service/dict-value.service";
+import {TableBase} from "../../table-base";
+import {Dictionary} from "../../domain/dictionary";
+import {DictionarySearchModel} from "../../domain/dict-search-model";
+import {DictionaryValue} from "../../domain/dictionary-value";
+import {DictValueService} from "../../service/dict-value.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -68,6 +68,10 @@ export class DictionaryValueListComponent extends TableBase<DictionaryValue> {
 
   getControl(name: string): FormControl {
     return this.form.controls[name] as FormControl;
+  }
+
+  onCancel() {
+    this.editDictValue = false;
   }
 
   private createEditDictValueForm() {

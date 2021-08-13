@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BaseSearchModel} from "../domain/base-search-model";
+import {BaseSearchModel} from "../../domain/base-search-model";
 
 @Component({
   selector: 'app-table-filter',
@@ -20,7 +20,7 @@ export class TableFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDateChange() {
+  emit() {
     this.change.emit(this.filter);
   }
 }

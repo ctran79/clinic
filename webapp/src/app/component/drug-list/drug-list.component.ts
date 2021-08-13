@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {Drug} from "../domain/drug";
-import {DrugService} from "../service/drug.service";
-import {TableBase} from "../table-base";
-import {DrugSearchModel} from "../domain/drug-search-model";
+import {Drug} from "../../domain/drug";
+import {DrugService} from "../../service/drug.service";
+import {TableBase} from "../../table-base";
+import {DrugSearchModel} from "../../domain/drug-search-model";
 import {Router} from "@angular/router";
 
 @Component({

@@ -17,6 +17,10 @@ export class DictService extends CrudService<Dictionary> {
     return this.http.get<Dictionary>(`${this.api}/code/${code}`);
   }
 
+  public getDictionaryByCode(code: string): Observable<Dictionary> {
+    return this.http.get<Dictionary>(`${this.api}/code/${code}`);
+  }
+
   protected getEndpoint(): string {
     return "dictionary";
   }

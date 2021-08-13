@@ -1,4 +1,4 @@
-export interface ListItem {
-  value: any;
-  text: string;
+export class ListItem {
+  constructor(public value: any, public text: string) {
+  }
 }

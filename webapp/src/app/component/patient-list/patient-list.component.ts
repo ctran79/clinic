@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {TableBase} from "../table-base";
-import {PatientSearchModel} from "../domain/patient-search-model";
-import {BaseSearchModel} from "../domain/base-search-model";
-import {PatientService} from "../service/patient.service";
-import {Patient} from "../domain/patient";
+import {TableBase} from "../../table-base";
+import {PatientSearchModel} from "../../domain/patient-search-model";
+import {BaseSearchModel} from "../../domain/base-search-model";
+import {PatientService} from "../../service/patient.service";
+import {Patient} from "../../domain/patient";
 import {Router} from "@angular/router";
-import {BaseObject} from "../domain/base-object";
-import {PrescriptionService} from "../service/prescription.service";
+import {BaseObject} from "../../domain/base-object";
+import {PrescriptionService} from "../../service/prescription.service";
 
 @Component({
   selector: 'app-patient-list',

@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PrescriptionDetailComponent} from "./prescription-detail/prescription-detail.component";
-import {DrugListComponent} from "./drug-list/drug-list.component";
-import {DrugDetailComponent} from "./drug-detail/drug-detail.component";
-import {PrescriptionListComponent} from "./prescription-list/prescription-list.component";
-import {DictionaryComponent} from "./dictionary/dictionary.component";
-import {PatientListComponent} from "./patient-list/patient-list.component";
-import {PatientDetailComponent} from "./patient-detail/patient-detail.component";
+import {PrescriptionDetailComponent} from "./component/prescription-detail/prescription-detail.component";
+import {DrugListComponent} from "./component/drug-list/drug-list.component";
+import {DrugDetailComponent} from "./component/drug-detail/drug-detail.component";
+import {PrescriptionListComponent} from "./component/prescription-list/prescription-list.component";
+import {DictionaryComponent} from "./component/dictionary/dictionary.component";
+import {PatientListComponent} from "./component/patient-list/patient-list.component";
+import {PatientDetailComponent} from "./component/patient-detail/patient-detail.component";
 
 const routes: Routes = [
   {

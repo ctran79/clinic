@@ -5,13 +5,13 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
-import {HeaderComponent} from './header/header.component';
-import {FooterComponent} from './footer/footer.component';
+import {HeaderComponent} from './component/header/header.component';
+import {FooterComponent} from './component/footer/footer.component';
 import {MatDividerModule} from "@angular/material/divider";
 import {MatMenuModule} from "@angular/material/menu";
-import {DrugListComponent} from './drug-list/drug-list.component';
-import {DrugDetailComponent} from './drug-detail/drug-detail.component';
-import {PrescriptionDetailComponent} from './prescription-detail/prescription-detail.component';
+import {DrugListComponent} from './component/drug-list/drug-list.component';
+import {DrugDetailComponent} from './component/drug-detail/drug-detail.component';
+import {PrescriptionDetailComponent} from './component/prescription-detail/prescription-detail.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
@@ -21,24 +21,25 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatIconModule} from "@angular/material/icon";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
-import {TableFilterComponent} from './table-filter/table-filter.component';
+import {TableFilterComponent} from './component/table-filter/table-filter.component';
 import {MatGridListModule} from "@angular/material/grid-list";
-import {IndicationDialogComponent} from './indication-dialog/indication-dialog.component';
+import {IndicationDialogComponent} from './component/indication-dialog/indication-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {PrescriptionListComponent} from './prescription-list/prescription-list.component';
+import {PrescriptionListComponent} from './component/prescription-list/prescription-list.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
-import { DictionaryComponent } from './dictionary/dictionary.component';
-import { PatientListComponent } from './patient-list/patient-list.component';
-import { PatientAgePipe } from './pipeline/patient-age.pipe';
+import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import {DictionaryComponent} from './component/dictionary/dictionary.component';
+import {PatientListComponent} from './component/patient-list/patient-list.component';
+import {PatientAgePipe} from './pipeline/patient-age.pipe';
 import {MatRadioModule} from "@angular/material/radio";
-import { PatientDetailComponent } from './patient-detail/patient-detail.component';
-import { DictionaryValueListComponent } from './dictionary-value-list/dictionary-value-list.component';
+import {PatientDetailComponent} from './component/patient-detail/patient-detail.component';
+import {DictionaryValueListComponent} from './component/dictionary-value-list/dictionary-value-list.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatListModule} from "@angular/material/list";
-import { DiagnosisDialogComponent } from './diagnosis-dialog/diagnosis-dialog.component';
+import {DiagnosisDialogComponent} from './component/diagnosis-dialog/diagnosis-dialog.component';
+import {CustomDateAdapter} from "./utils/custom-date-adapter";
 
 @NgModule({
   declarations: [
@@ -85,7 +86,10 @@ import { DiagnosisDialogComponent } from './diagnosis-dialog/diagnosis-dialog.co
     MatCheckboxModule,
     MatListModule
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: DateAdapter, useClass: CustomDateAdapter}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

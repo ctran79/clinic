@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Prescription} from "../domain/prescription";
-import {PrescriptionService} from "../service/prescription.service";
+import {Prescription} from "../../domain/prescription";
+import {PrescriptionService} from "../../service/prescription.service";
 import {MatTableDataSource} from "@angular/material/table";
-import {Indication} from "../domain/indication";
+import {Indication} from "../../domain/indication";
 import {MatDialog} from "@angular/material/dialog";
 import {IndicationDialogComponent} from "../indication-dialog/indication-dialog.component";
-import {Diagnosis} from "../domain/diagnosis";
-import {PatientService} from "../service/patient.service";
-import {Patient} from "../domain/patient";
+import {Diagnosis} from "../../domain/diagnosis";
+import {PatientService} from "../../service/patient.service";
+import {Patient} from "../../domain/patient";
 
 @Component({
   selector: 'app-prescription-detail',
