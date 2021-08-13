@@ -40,7 +40,7 @@ export abstract class CrudService<T extends BaseObject> {
     return this.http.get<T>(`${this.api}/${id}`);
   }
 
-  public getAllModel() : Observable<T[]> {
+  public getAllModel(): Observable<T[]> {
     return this.http.get<T[]>(`${this.api}/all`);
   }
 
@@ -56,7 +56,7 @@ export abstract class CrudService<T extends BaseObject> {
     searchModel.fields.forEach(field => {
       if (_.isDate(field.value)) {
         params = params.set(field.name, formatDate(field.value, 'dd/MM/yyyy HH:mm:ss', 'en-GB'));
-      } else if (!_.isEmpty(field.value)) {
+      } else if (_.isBoolean(field.value) || !_.isEmpty(field.value)) {
         params = params.set(field.name, field.value);
       }
     });

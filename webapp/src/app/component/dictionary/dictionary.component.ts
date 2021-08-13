@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DictService} from "../../service/dict.service";
+import {DictionaryService} from "../../service/dictionary.service";
 import {Dictionary} from "../../domain/dictionary";
 
 @Component({
@@ -12,7 +12,7 @@ export class DictionaryComponent implements OnInit {
   dictList: Dictionary[] = [];
   selectedDict: Dictionary | undefined;
 
-  constructor(public dictService: DictService) {
+  constructor(public dictService: DictionaryService) {
   }
 
   ngOnInit(): void {
@@ -23,14 +23,17 @@ export class DictionaryComponent implements OnInit {
     this.selectedDict = this.dictList.find(dict => dict.id === dictId);
   }
 
+  saveDictionary(dictionary: Dictionary) {
+    this.dictService.saveModel(dictionary).subscribe(value => this.loadDictionaries());
+  }
+
   private loadDictionaries() {
     this.dictService.getAllModel().subscribe(result => {
       this.dictList = result;
+      if (this.selectedDict) {
+        this.selectedDict = this.dictList.find(dict => dict.id === this.selectedDict?.id);
+      }
     });
-  }
-
-  saveDictionary(dictionary: Dictionary) {
-    this.dictService.saveModel(dictionary).subscribe();
   }
 }
 

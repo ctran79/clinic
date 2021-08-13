@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DrugService} from "../../service/drug.service";
 import {Observable} from "rxjs";
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
-import {DrugSearchModel} from "../../domain/drug-search-model";
+import {DictionarySearchModel} from "../../domain/drug-search-model";
 
 @Component({
   selector: 'app-drug-detail',
@@ -40,7 +40,7 @@ export class DrugDetailComponent implements OnInit {
   }
 
   filter(val: string): Observable<Drug[]> {
-    let drugSearchModel = new DrugSearchModel();
+    let drugSearchModel = new DictionarySearchModel();
 
     return this.drugService.search(drugSearchModel)
       .pipe(

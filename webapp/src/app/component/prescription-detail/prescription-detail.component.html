@@ -3,17 +3,25 @@
 </h2>
 
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <mat-label>Bệnh nhân: <span>{{patient?.name}} ({{patient | patientAge}}, {{patient?.weight}}kg)  </span></mat-label>
+  <mat-label class="text-danger">
+    Bệnh nhân: <b>{{patient?.name}}</b> ({{patient | patientAge}}, {{patient?.weight}}kg)
+  </mat-label>
 
-  <div class="mt-2"><h3><b>Chẩn đoán:</b></h3></div>
+  <div class="mt-5"><h3><b>Chẩn đoán:</b></h3></div>
   <mat-list>
-    <mat-list-item *ngFor="let diagnosis of diagnosisList">{{diagnosis.diagnosis.value}}</mat-list-item>
+    <mat-list-item
+      *ngFor="let diagnosis of diagnosisList">
+      <button (click)="removeDiagnosis(diagnosis)" color="warn" mat-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+      {{diagnosis.seqNo + '. ' + diagnosis.diagnosis.value}}
+    </mat-list-item>
   </mat-list>
   <div class="mt-2">
     <button color="primary" mat-flat-button (click)="addDiagnosis()">Thêm chẩn đoán</button>
   </div>
 
-  <div class="mt-2"><h3><b>Chỉ định thuốc:</b></h3></div>
+  <div class="mt-5"><h3><b>Chỉ định thuốc:</b></h3></div>
   <mat-table #table [dataSource]="indicationDataSource">
     <ng-container matColumnDef="drug">
       <mat-header-cell *matHeaderCellDef><b>Tên thuốc</b></mat-header-cell>
@@ -25,7 +33,7 @@
       <mat-cell *matCellDef="let obj"><b>{{obj.quantity}}</b><br/></mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="Đơn vị">
+    <ng-container matColumnDef="unit">
       <mat-header-cell *matHeaderCellDef><b>Đơn vị</b></mat-header-cell>
       <mat-cell *matCellDef="let obj">{{obj.unit.value}}</mat-cell>
     </ng-container>
@@ -42,13 +50,13 @@
     <mat-header-row *matHeaderRowDef="indicationDisplayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: indicationDisplayedColumns"></mat-row>
   </mat-table>
+
+  <div class="mt-2">
+    <button (click)="addDrug()" color="primary" class="me-2" mat-flat-button>Thêm thuốc</button>
+  </div>
+
+  <div class="mt-5">
+    <button (click)="onSubmit()" class="me-2" color="primary" mat-flat-button>Lưu đơn</button>
+    <button (click)="navigateToList()" class="me-2" color="warn" mat-flat-button>Danh sách bệnh nhân</button>
+  </div>
 </form>
-
-<div class="mt-2">
-  <button (click)="addDrug()" color="primary" class="me-2" mat-flat-button>Thêm thuốc</button>
-</div>
-
-<div class="mt-2">
-  <button (click)="onSubmit()" class="me-2" color="primary" mat-flat-button>Lưu đơn</button>
-  <button (click)="navigateToList()" class="me-2" color="warn" mat-flat-button>Danh sách bệnh nhân</button>
-</div>

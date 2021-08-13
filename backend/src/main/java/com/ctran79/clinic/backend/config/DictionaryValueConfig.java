@@ -1,6 +1,7 @@
 package com.ctran79.clinic.backend.config;
 
 import com.ctran79.clinic.backend.facade.DictionaryFacade;
+import com.ctran79.clinic.backend.facade.DictionaryValueFacade;
 import com.ctran79.clinic.backend.service.dictionary.DictionaryRepository;
 import com.ctran79.clinic.backend.service.dictionary.DictionaryService;
 import com.ctran79.clinic.backend.service.dictionary.DictionaryValueRepository;
@@ -10,13 +11,12 @@ import org.springframework.context.annotation.Configuration;
 
 /** @author ctran79 */
 @Configuration
-public class DictionaryConfig {
+public class DictionaryValueConfig {
 
   @Bean
-  public DictionaryFacade dictionaryFacade(DictionaryRepository dictionaryRepository, DictionaryValueRepository dictionaryValueRepository) {
-    DictionaryService dictionaryService = new DictionaryService(dictionaryRepository);
+  public DictionaryValueFacade dictionaryValueFacade(DictionaryValueRepository dictionaryValueRepository) {
     DictionaryValueService dictionaryValueService = new DictionaryValueService(dictionaryValueRepository);
-    DictionaryFacade dictionaryFacade = new DictionaryFacade(dictionaryService, dictionaryValueService);
-    return dictionaryFacade;
+    DictionaryValueFacade dictionaryValueFacade = new DictionaryValueFacade(dictionaryValueService);
+    return dictionaryValueFacade;
   }
 }

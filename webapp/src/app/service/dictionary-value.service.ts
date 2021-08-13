@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class DictValueService extends CrudService<DictionaryValue>{
+export class DictionaryValueService extends CrudService<DictionaryValue>{
 
   constructor(protected http: HttpClient) { super(http); }
 

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PatientService} from "../../service/patient.service";
 import {Patient} from "../../domain/patient";
 import {DictionaryValue} from "../../domain/dictionary-value";
-import {DictService} from "../../service/dict.service";
+import {DictionaryService} from "../../service/dictionary.service";
 import {DictionaryCode} from "../../domain/dictionary-code";
 import {compareFn} from "../../utils/utils";
 
@@ -23,7 +23,7 @@ export class PatientDetailComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               public router: Router,
-              public dictService: DictService,
+              public dictService: DictionaryService,
               public activatedRoute: ActivatedRoute,
               public patientService: PatientService) {
   }

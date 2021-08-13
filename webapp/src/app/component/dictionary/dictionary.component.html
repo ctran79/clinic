@@ -9,4 +9,9 @@
   </mat-form-field>
 </div>
 
-<app-dictionary-value-list *ngIf="selectedDict" [dictionary]="selectedDict" (onAddOrEditDictValue)="saveDictionary($event)"></app-dictionary-value-list>
+<div class="mt-2" *ngIf="selectedDict">Tổng số: {{selectedDict.dictionaryValues.length}}</div>
+
+<app-dictionary-value-list *ngIf="selectedDict"
+                           [dictionary]="selectedDict"
+                           (onAddOrEditDictValue)="saveDictionary($event)">
+</app-dictionary-value-list>

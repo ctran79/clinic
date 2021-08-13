@@ -1,6 +1,6 @@
 import {BaseSearchModel, SearchField} from "./base-search-model";
 
-export class DrugSearchModel extends BaseSearchModel {
+export class DictionarySearchModel extends BaseSearchModel {
 
   constructor() {
     super();

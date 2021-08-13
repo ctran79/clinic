@@ -10,6 +10,7 @@ import {IndicationDialogComponent} from "../indication-dialog/indication-dialog.
 import {Diagnosis} from "../../domain/diagnosis";
 import {PatientService} from "../../service/patient.service";
 import {Patient} from "../../domain/patient";
+import {DiagnosisDialogComponent} from "../diagnosis-dialog/diagnosis-dialog.component";
 
 @Component({
   selector: 'app-prescription-detail',
@@ -108,5 +109,22 @@ export class PrescriptionDetailComponent implements OnInit {
   }
 
   addDiagnosis() {
+    const dialogRef = this.dialog.open(DiagnosisDialogComponent, {
+      width: '666px',
+      height: '150px',
+    });
+    dialogRef.afterClosed().subscribe(diagnosis => {
+      if (diagnosis) {
+        const seqNo = this.diagnosisList.length + 1;
+        this.diagnosisList = [...this.diagnosisList, {
+          seqNo,
+          diagnosis
+        }];
+      }
+    });
+  }
+
+  removeDiagnosis(diagnosis: Diagnosis) {
+
   }
 }

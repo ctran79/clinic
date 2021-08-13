@@ -16,7 +16,7 @@ import java.util.Map;
 public class PatientSpecification extends BaseSpecification<Patient> {
   public static final String CREATE_DATE_FROM = "createDateFrom";
   public static final String CREATE_DATE_TO = "createDateTo";
-  public static final String ALL_PATIENT = "allPatients";
+  public static final String ALL_PATIENTS = "allPatients";
 
   public static Specification buildSpecification(Map<String, String> params) {
     return (root, criteriaQuery, criteriaBuilder) -> {
@@ -33,15 +33,15 @@ public class PatientSpecification extends BaseSpecification<Patient> {
             LocalDate.parse(params.get(CREATE_DATE_TO), DATE_TIME_FORMATTER).atTime(23, 59, 59);
         predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(Patient_.CREATE_DATE), endOfDay));
       }
-      if (StringUtils.hasText(params.get(ALL_PATIENT))) {
-        Boolean allPatients = Boolean.parseBoolean(params.get(ALL_PATIENT));
+      if (StringUtils.hasText(params.get(ALL_PATIENTS))) {
+        Boolean allPatients = Boolean.parseBoolean(params.get(ALL_PATIENTS));
         if (allPatients) {
           predicates.add(
               criteriaBuilder.or(
-                  criteriaBuilder.equal(root.get(Patient_.IS_EXAMINED), Boolean.TRUE),
-                  criteriaBuilder.equal(root.get(Patient_.IS_EXAMINED), Boolean.FALSE)));
+                  criteriaBuilder.isTrue(root.get(Patient_.IS_EXAMINED)),
+                  criteriaBuilder.isFalse(root.get(Patient_.IS_EXAMINED))));
         } else {
-          predicates.add(criteriaBuilder.equal(root.get(Patient_.IS_EXAMINED), Boolean.FALSE));
+          predicates.add(criteriaBuilder.isFalse(root.get(Patient_.IS_EXAMINED)));
         }
       }
 

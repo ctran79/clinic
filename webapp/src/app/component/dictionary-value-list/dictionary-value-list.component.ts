@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TableBase} from "../../table-base";
 import {Dictionary} from "../../domain/dictionary";
-import {DictionarySearchModel} from "../../domain/dict-search-model";
+import {DictionarySearchModel} from "../../domain/dictionary-search-model";
 import {DictionaryValue} from "../../domain/dictionary-value";
-import {DictValueService} from "../../service/dict-value.service";
+import {DictionaryValueService} from "../../service/dictionary-value.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -22,7 +22,7 @@ export class DictionaryValueListComponent extends TableBase<DictionaryValue> {
   onAddOrEditDictValue = new EventEmitter<Dictionary>();
 
   constructor(public formBuilder: FormBuilder,
-              public dictService: DictValueService) {
+              public dictService: DictionaryValueService) {
     super(dictService);
   }
 
@@ -45,7 +45,7 @@ export class DictionaryValueListComponent extends TableBase<DictionaryValue> {
 
   edit(dictValue: DictionaryValue) {
     this.editDictValue = true;
-    this.form.patchValue(dictValue);
+    this.patchValue(dictValue);
   }
 
   add() {
@@ -63,6 +63,7 @@ export class DictionaryValueListComponent extends TableBase<DictionaryValue> {
       }
       this.onAddOrEditDictValue.emit(this._dictionary);
       this.editDictValue = false;
+      this.patchValue(undefined);
     }
   }
 
@@ -84,5 +85,13 @@ export class DictionaryValueListComponent extends TableBase<DictionaryValue> {
 
   private createObject(): DictionaryValue {
     return this.form.value;
+  }
+
+  private patchValue(dictValue: DictionaryValue | undefined) {
+    if (dictValue) {
+      this.form.patchValue(dictValue);
+    } else {
+      this.form.reset();
+    }
   }
 }

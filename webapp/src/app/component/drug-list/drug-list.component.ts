@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Drug} from "../../domain/drug";
 import {DrugService} from "../../service/drug.service";
 import {TableBase} from "../../table-base";
-import {DrugSearchModel} from "../../domain/drug-search-model";
+import {DictionarySearchModel} from "../../domain/drug-search-model";
 import {Router} from "@angular/router";
 
 @Component({
@@ -22,8 +22,8 @@ export class DrugListComponent extends TableBase<Drug> {
     super.ngOnInit();
   }
 
-  initSearchModel(): DrugSearchModel {
-    return new DrugSearchModel();
+  initSearchModel(): DictionarySearchModel {
+    return new DictionarySearchModel();
   }
 
   async edit(obj: Drug) {

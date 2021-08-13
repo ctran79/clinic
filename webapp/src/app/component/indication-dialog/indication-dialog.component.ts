@@ -5,7 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {Drug} from "../../domain/drug";
-import {DrugSearchModel} from "../../domain/drug-search-model";
+import {DictionarySearchModel} from "../../domain/drug-search-model";
 import {DrugService} from "../../service/drug.service";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 
@@ -51,9 +51,9 @@ export class IndicationDialogComponent implements OnInit {
   }
 
   filter(val: string): Observable<Drug[]> {
-    let drugSearchModel = new DrugSearchModel();
+    let drugSearchModel = new DictionarySearchModel();
     drugSearchModel.fields.forEach(field => {
-      if (field.name = 'name') {
+      if (field.name === 'name') {
         field.value = val;
       }
     });
