@@ -39,7 +39,7 @@ export class DiagnosisDialogComponent implements OnInit {
   }
 
   getDiagnosisName(diagnosis: DictionaryValue) {
-    return diagnosis.value;
+    return diagnosis?.value;
   }
 
   filter(val: string): Observable<DictionaryValue[]> {

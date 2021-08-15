@@ -23,7 +23,7 @@ export class PatientDetailComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               public router: Router,
-              public dictService: DictionaryService,
+              public dictionaryService: DictionaryService,
               public activatedRoute: ActivatedRoute,
               public patientService: PatientService) {
   }
@@ -93,7 +93,7 @@ export class PatientDetailComponent implements OnInit {
   }
 
   private getDictionary() {
-    this.dictService.getDictByCode(DictionaryCode.GENDER).subscribe(dictionary => {
+    this.dictionaryService.getDictByCode(DictionaryCode.GENDER).subscribe(dictionary => {
       this.genderDict = dictionary.dictionaryValues;
     });
   }

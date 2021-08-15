@@ -6,18 +6,18 @@
            matSort>
 
   <ng-container matColumnDef="createDate">
-    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Ngày đăng kí</b></mat-header-cell>
-    <mat-cell *matCellDef="let obj">{{obj.createDate | date : 'dd/MM/yyyy'}}</mat-cell>
+    <mat-header-cell class="col-2" *matHeaderCellDef mat-sort-header><b>Ngày đăng kí</b></mat-header-cell>
+    <mat-cell class="col-2" *matCellDef="let obj">{{obj.createDate | date : 'dd/MM/yyyy'}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="isExamined">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let obj">{{patientIsExamined(obj)}}</mat-cell>
+    <mat-header-cell class="col-1" *matHeaderCellDef><b>Tình trạng</b></mat-header-cell>
+    <mat-cell class="col-1" *matCellDef="let obj">{{patientIsExamined(obj)}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="age">
-    <mat-header-cell *matHeaderCellDef><b>Tuổi</b></mat-header-cell>
-    <mat-cell *matCellDef="let obj">{{obj | patientAge}}</mat-cell>
+    <mat-header-cell class="col-1" *matHeaderCellDef><b>Tuổi</b></mat-header-cell>
+    <mat-cell class="col-1" *matCellDef="let obj">{{obj | patientAge}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">

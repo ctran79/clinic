@@ -39,16 +39,10 @@ export class PatientListComponent extends TableBase<Patient> {
     await this.router.navigate(['/patient-detail']);
   }
 
-  async addOrEditPrescription(patient: Patient) {
-    this.prescriptionService.getByPatient(patient.id!).subscribe(prescription => {
-      if (prescription) {
-        this.router.navigate([`/prescription-detail/${prescription.id}`]);
-      } else {
-        this.router.navigate([`/prescription-detail`], {
-          queryParams: {
-            patientId: patient.id
-          }
-        });
+  addOrEditPrescription(patient: Patient) {
+    return this.router.navigate([`/prescription-detail`], {
+      queryParams: {
+        patientId: patient.id
       }
     });
   }

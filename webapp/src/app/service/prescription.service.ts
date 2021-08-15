@@ -13,7 +13,7 @@ export class PrescriptionService extends CrudService<Prescription> {
     super(http);
   }
 
-  getByPatient(patientId: number): Observable<Prescription> {
+  getByPatientId(patientId: number): Observable<Prescription> {
     return this.http.get<Prescription>(`${this.api}/patient/${patientId}`);
   }
 

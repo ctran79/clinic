@@ -36,6 +36,8 @@ public class Prescription extends BaseEntity {
       mappedBy = "prescription")
   private Set<Indication> indications = new HashSet<>();
 
+  private String note;
+
   public void addDiagnosis(Diagnosis diagnosis) {
     diagnosis.setPrescription(this);
     this.diagnoses.add(diagnosis);
@@ -53,10 +55,12 @@ public class Prescription extends BaseEntity {
         .patient(patient.toDto())
         .diagnoses(diagnoses.stream().map(Diagnosis::toDto).collect(Collectors.toSet()))
         .indications(indications.stream().map(Indication::toDto).collect(Collectors.toSet()))
+        .note(note)
         .build();
   }
 
   public Prescription toEntity(PrescriptionDto dto) {
+    note = dto.getNote();
     return this;
   }
 }

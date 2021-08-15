@@ -19,4 +19,5 @@ public class PrescriptionDto {
 
   private Set<DiagnosisDto> diagnoses;
   private Set<IndicationDto> indications;
+  private String note;
 }

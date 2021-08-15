@@ -8,6 +8,10 @@ import {Drug} from "../../domain/drug";
 import {DictionarySearchModel} from "../../domain/drug-search-model";
 import {DrugService} from "../../service/drug.service";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
+import {compareFn} from "../../utils/utils";
+import {DictionaryValue} from "../../domain/dictionary-value";
+import {DictionaryCode} from "../../domain/dictionary-code";
+import {DictionaryService} from "../../service/dictionary.service";
 
 @Component({
   selector: 'app-indication-dialog',
@@ -19,15 +23,21 @@ export class IndicationDialogComponent implements OnInit {
   form!: FormGroup;
   filteredDrugs!: Observable<Drug[]>;
   selectedDrug!: Drug;
+  unitDict: DictionaryValue[] = [];
+
+  compareFn = compareFn;
 
   constructor(public dialogRef: MatDialogRef<IndicationDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Indication,
               public formBuilder: FormBuilder,
+              public dictionaryService: DictionaryService,
               public drugService: DrugService) {
   }
 
   ngOnInit(): void {
     this.createFormView();
+    this.getDictionary();
+
     if (this.data) {
       this.patchForm(this.data);
     }
@@ -47,7 +57,12 @@ export class IndicationDialogComponent implements OnInit {
       drug: ['', Validators.required],
       quantity: [1, Validators.required],
       usage: ['', Validators.required],
+      unit: [undefined, Validators.required]
     })
+  }
+
+  getDrugName(drug: Drug) {
+    return drug.name;
   }
 
   filter(val: string): Observable<Drug[]> {
@@ -69,7 +84,7 @@ export class IndicationDialogComponent implements OnInit {
   }
 
   patchForm(data: Indication) {
-    this.form.patchValue({})
+    this.form.patchValue(data);
   }
 
   selectProduct($event: MatAutocompleteSelectedEvent) {
@@ -86,7 +101,13 @@ export class IndicationDialogComponent implements OnInit {
     }
   }
 
-  private createIndication() : Indication {
+  private getDictionary() {
+    this.dictionaryService.getDictByCode(DictionaryCode.DRUG_UNIT).subscribe(dictionary => {
+      this.unitDict = dictionary.dictionaryValues;
+    });
+  }
+
+  private createIndication(): Indication {
     return this.form.value;
   }
 }

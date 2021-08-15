@@ -1,14 +1,18 @@
 package com.ctran79.clinic.backend.facade;
 
 import com.ctran79.clinic.backend.domain.prescription.*;
+import com.ctran79.clinic.backend.service.Utils;
 import com.ctran79.clinic.backend.service.dictionary.DictionaryValueService;
 import com.ctran79.clinic.backend.service.drug.DrugService;
 import com.ctran79.clinic.backend.service.patient.PatientService;
 import com.ctran79.clinic.backend.service.prescription.DiagnosisService;
 import com.ctran79.clinic.backend.service.prescription.IndicationService;
 import com.ctran79.clinic.backend.service.prescription.PrescriptionService;
+import net.sf.jasperreports.engine.*;
 import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /** @author ctran79 */
@@ -86,5 +90,12 @@ public class PrescriptionFacade extends BaseCrudFacade<Prescription, Prescriptio
   public PrescriptionDto getByPatientId(Long patientId) {
     Prescription prescription = prescriptionService.getByPatientId(patientId);
     return prescription == null ? null : toDto(prescription);
+  }
+
+  public JasperPrint getPrescriptionAsReport(Long prescriptionId) throws JRException {
+    JasperReport jasperReport = Utils.getCompiledReport("prescription");
+    Map<String, Object> params = new HashMap<>();
+
+    return JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());
   }
 }

@@ -2,8 +2,8 @@
   Thêm/sửa đơn thuốc:
 </h2>
 
-<form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <mat-label class="text-danger">
+<form [formGroup]="form">
+  <mat-label *ngIf="patient" class="text-primary">
     Bệnh nhân: <b>{{patient?.name}}</b> ({{patient | patientAge}}, {{patient?.weight}}kg)
   </mat-label>
 
@@ -18,31 +18,36 @@
     </mat-list-item>
   </mat-list>
   <div class="mt-2">
-    <button color="primary" mat-flat-button (click)="addDiagnosis()">Thêm chẩn đoán</button>
+    <button (click)="addDiagnosis()" color="primary" mat-flat-button>Thêm chẩn đoán</button>
   </div>
 
   <div class="mt-5"><h3><b>Chỉ định thuốc:</b></h3></div>
   <mat-table #table [dataSource]="indicationDataSource">
     <ng-container matColumnDef="drug">
       <mat-header-cell *matHeaderCellDef><b>Tên thuốc</b></mat-header-cell>
-      <mat-cell *matCellDef="let obj"><b>{{obj.drug.name}}</b><br/></mat-cell>
+      <mat-cell *matCellDef="let obj">
+        <div>
+          <div class="w-100"><b>{{obj.drug.name}}</b></div>
+          <div class="w-100">{{obj.usage}}</div>
+        </div>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <mat-header-cell *matHeaderCellDef><b>Số lượng</b></mat-header-cell>
-      <mat-cell *matCellDef="let obj"><b>{{obj.quantity}}</b><br/></mat-cell>
+      <mat-header-cell *matHeaderCellDef class="col-1"><b>Số lượng</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj" class="col-1">{{obj.quantity}}<br/></mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="unit">
-      <mat-header-cell *matHeaderCellDef><b>Đơn vị</b></mat-header-cell>
-      <mat-cell *matCellDef="let obj">{{obj.unit.value}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef class="col-1"><b>Đơn vị</b></mat-header-cell>
+      <mat-cell *matCellDef="let obj" class="col-1">{{obj.unit.value}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let obj">
-        <button (click)="addDrug(obj)" color="primary" mat-button>
-          <mat-icon>edit</mat-icon>
+        <button (click)="deleteDrug(obj)" color="warn" mat-button>
+          <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
@@ -51,12 +56,22 @@
     <mat-row *matRowDef="let row; columns: indicationDisplayedColumns"></mat-row>
   </mat-table>
 
-  <div class="mt-2">
-    <button (click)="addDrug()" color="primary" class="me-2" mat-flat-button>Thêm thuốc</button>
+  <div class="mt-5">
+    <button (click)="addIndication()" class="me-2" color="primary" mat-flat-button>Thêm thuốc</button>
   </div>
+
+  <mat-form-field appearance="fill" class="w-100 mt-5">
+    <mat-label>Lời dặn của bác sĩ</mat-label>
+    <textarea #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5"
+              cdkAutosizeMinRows="1"
+              cdkTextareaAutosize
+              formControlName="note"
+              matInput></textarea>
+  </mat-form-field>
 
   <div class="mt-5">
     <button (click)="onSubmit()" class="me-2" color="primary" mat-flat-button>Lưu đơn</button>
+    <a *ngIf="prescription" class="me-2" target="_blank" color="accent" [href]="getPrintPrescriptionEndPoint()" mat-flat-button>In đơn</a>
     <button (click)="navigateToList()" class="me-2" color="warn" mat-flat-button>Danh sách bệnh nhân</button>
   </div>
 </form>

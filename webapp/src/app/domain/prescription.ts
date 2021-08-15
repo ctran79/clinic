@@ -4,8 +4,8 @@ import {Patient} from "./patient";
 import {Diagnosis} from "./diagnosis";
 
 export interface Prescription extends BaseObject {
-  createDate: Date;
   patient: Patient;
-  diagnoses: Set<Diagnosis>;
-  indications: Set<Indication>;
+  diagnoses: Diagnosis[];
+  indications: Indication[];
+  note: string;
 }

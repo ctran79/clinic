@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Prescription} from "../../domain/prescription";
 import {PrescriptionService} from "../../service/prescription.service";
@@ -8,9 +8,11 @@ import {Indication} from "../../domain/indication";
 import {MatDialog} from "@angular/material/dialog";
 import {IndicationDialogComponent} from "../indication-dialog/indication-dialog.component";
 import {Diagnosis} from "../../domain/diagnosis";
-import {PatientService} from "../../service/patient.service";
 import {Patient} from "../../domain/patient";
 import {DiagnosisDialogComponent} from "../diagnosis-dialog/diagnosis-dialog.component";
+import {PatientService} from "../../service/patient.service";
+import {forkJoin} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-prescription-detail',
@@ -22,7 +24,6 @@ export class PrescriptionDetailComponent implements OnInit {
 
   form!: FormGroup;
   prescription!: Prescription;
-  id: number = this.activatedRoute.snapshot.params.id;
   patientId: number = this.activatedRoute.snapshot.queryParams.patientId;
   patient!: Patient;
 
@@ -45,13 +46,8 @@ export class PrescriptionDetailComponent implements OnInit {
 
   createFormView() {
     this.form = this.formBuilder.group({
-      client: ['', Validators.required],
-      address: [''],
+      note: [''],
     });
-  }
-
-  errorHandling(control: string, error: string) {
-    return this.getControl(control).hasError(error);
   }
 
   onSubmit() {
@@ -61,49 +57,56 @@ export class PrescriptionDetailComponent implements OnInit {
     }
   }
 
-  getControl(name: string): AbstractControl {
-    return this.form.controls[name];
-  }
-
-  createObject() {
-    // this.prescription = {
-    //   id: this.id,
-    //
-    // };
-    return this.prescription;
+  createObject(): Prescription {
+    return {
+      id: this.prescription?.id,
+      patient: this.patient,
+      diagnoses: this.diagnosisList,
+      indications: this.indicationDataSource.data,
+      note: this.getControl('note').value
+    };
   }
 
   getData() {
-    if (this.id) {
-      this.prescriptionService.getModel(this.id).subscribe(prescription => this.patchFormValue(prescription));
-    }
     if (this.patientId) {
-      this.patientService.getModel(this.patientId).subscribe(patient => this.patient = patient);
+      forkJoin([this.patientService.getModel(this.patientId), this.prescriptionService.getByPatientId(this.patientId)])
+        .subscribe(([patient, prescription]) => {
+            this.patient = patient;
+            this.patchFormValue(prescription);
+          }
+        );
     }
   }
 
-  patchFormValue(prescription: Prescription) {
-    if (prescription.id) {
-      this.id = prescription.id;
-    }
-    this.prescription = prescription;
-    this.form.patchValue({});
+  getControl(name: string): FormControl {
+    return this.form.controls[name] as FormControl;
+  }
 
-    this.indicationDataSource = new MatTableDataSource(Array.from(prescription.indications));
+  patchFormValue(prescription: Prescription) {
+    this.prescription = prescription;
+    if (prescription?.id) {
+      this.form.patchValue({note: prescription.note});
+
+      this.diagnosisList = prescription.diagnoses;
+      this.indicationDataSource = new MatTableDataSource(prescription.indications);
+    }
   }
 
   async navigateToList() {
     await this.router.navigate(['/patient-list']);
   }
 
-  addDrug(obj?: Indication) {
+  addIndication(obj?: Indication) {
     const dialogRef = this.dialog.open(IndicationDialogComponent, {
       width: '666px',
-      height: '300px',
+      height: '350px',
       data: obj
     });
-    dialogRef.afterClosed().subscribe(newItem => {
-      if (newItem) {
+    dialogRef.afterClosed().subscribe(indication => {
+      if (indication) {
+        const indicationList = this.indicationDataSource.data;
+        indicationList.push(indication);
+        this.indicationDataSource = new MatTableDataSource([...indicationList]);
       }
     });
   }
@@ -125,6 +128,20 @@ export class PrescriptionDetailComponent implements OnInit {
   }
 
   removeDiagnosis(diagnosis: Diagnosis) {
+    const idx = this.diagnosisList.indexOf(diagnosis);
+    this.diagnosisList.splice(idx, 1);
+    this.diagnosisList.forEach((diagnosis, index) => diagnosis.seqNo = index + 1);
+    this.diagnosisList = [...this.diagnosisList];
+  }
 
+  deleteDrug(indication: Indication) {
+    const indicationList = this.indicationDataSource.data;
+    const idx = indicationList.indexOf(indication);
+    indicationList.splice(idx, 1);
+    this.indicationDataSource = new MatTableDataSource(indicationList);
+  }
+
+  getPrintPrescriptionEndPoint() {
+    return `${environment.server}/print/prescription/${this.prescription.id}`;
   }
 }
