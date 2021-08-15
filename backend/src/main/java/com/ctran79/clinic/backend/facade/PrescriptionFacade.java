@@ -11,6 +11,7 @@ import com.ctran79.clinic.backend.service.prescription.PrescriptionService;
 import net.sf.jasperreports.engine.*;
 import org.springframework.util.CollectionUtils;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -92,7 +93,7 @@ public class PrescriptionFacade extends BaseCrudFacade<Prescription, Prescriptio
     return prescription == null ? null : toDto(prescription);
   }
 
-  public JasperPrint getPrescriptionAsReport(Long prescriptionId) throws JRException {
+  public JasperPrint getPrescriptionAsReport(Long prescriptionId) throws JRException, FileNotFoundException {
     JasperReport jasperReport = Utils.getCompiledReport("prescription");
     Map<String, Object> params = new HashMap<>();
 
