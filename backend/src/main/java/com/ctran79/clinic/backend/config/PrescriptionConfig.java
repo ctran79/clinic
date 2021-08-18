@@ -10,6 +10,7 @@ import com.ctran79.clinic.backend.service.patient.PatientService;
 import com.ctran79.clinic.backend.service.prescription.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ResourceLoader;
 
 /** @author ctran79 */
 @Configuration
@@ -22,7 +23,8 @@ public class PrescriptionConfig {
       DiagnosisRepository diagnosisRepository,
       PatientRepository patientRepository,
       DrugRepository drugRepository,
-      DictionaryValueRepository dictionaryValueRepository) {
+      DictionaryValueRepository dictionaryValueRepository,
+      ResourceLoader resourceLoader) {
 
     PrescriptionService prescriptionService = new PrescriptionService(prescriptionRepository);
     IndicationService indicationService = new IndicationService(indicationRepository);
@@ -39,7 +41,8 @@ public class PrescriptionConfig {
             diagnosisService,
             patientService,
             drugService,
-            dictionaryValueService);
+            dictionaryValueService,
+            resourceLoader);
     return prescriptionFacade;
   }
 }

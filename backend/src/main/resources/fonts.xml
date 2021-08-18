@@ -11,6 +11,6 @@
         <boldItalic><![CDATA[fonts/arialbi.ttf]]></boldItalic>
         <!-- Is font is embedded in PDF -->
         <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
-        <pdfEncoding>Cp1250</pdfEncoding>
+        <pdfEncoding>Identity-H</pdfEncoding>
     </fontFamily>
 </fontFamilies>

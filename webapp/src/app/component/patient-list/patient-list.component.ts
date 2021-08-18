@@ -7,6 +7,7 @@ import {Patient} from "../../domain/patient";
 import {Router} from "@angular/router";
 import {BaseObject} from "../../domain/base-object";
 import {PrescriptionService} from "../../service/prescription.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-patient-list',
@@ -45,5 +46,10 @@ export class PatientListComponent extends TableBase<Patient> {
         patientId: patient.id
       }
     });
+  }
+
+  printPrescription(patient: Patient) {
+    const url = `${environment.server}/print/prescription?patientId=${patient.id}`;
+    window.open(url, "_blank");
   }
 }

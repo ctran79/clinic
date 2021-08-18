@@ -5,6 +5,7 @@ import com.ctran79.clinic.backend.service.dictionary.DictionaryValueRepository;
 import com.ctran79.clinic.backend.service.dictionary.DictionaryValueService;
 import com.ctran79.clinic.backend.service.patient.PatientRepository;
 import com.ctran79.clinic.backend.service.patient.PatientService;
+import com.ctran79.clinic.backend.service.prescription.PrescriptionRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,10 +14,17 @@ import org.springframework.context.annotation.Configuration;
 public class PatientConfig {
 
   @Bean
-  public PatientFacade patientFacade(PatientRepository patientRepository, DictionaryValueRepository dictionaryValueRepository) {
+  public PatientFacade patientFacade(
+      PatientRepository patientRepository,
+      DictionaryValueRepository dictionaryValueRepository,
+      PrescriptionRepository prescriptionRepository) {
+
     PatientService patientService = new PatientService(patientRepository);
-    DictionaryValueService dictionaryValueService = new DictionaryValueService(dictionaryValueRepository);
-    PatientFacade patientFacade = new PatientFacade(patientService, dictionaryValueService);
+    DictionaryValueService dictionaryValueService =
+        new DictionaryValueService(dictionaryValueRepository);
+    PatientFacade patientFacade =
+        new PatientFacade(patientService, dictionaryValueService, prescriptionRepository);
+
     return patientFacade;
   }
 }

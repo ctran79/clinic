@@ -29,4 +29,5 @@ public class PatientDto {
   private Integer weight;
   private Integer height;
   private Boolean isExamined;
+  private Boolean hasPrescription;
 }

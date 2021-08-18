@@ -11,4 +11,5 @@ export interface Patient extends BaseObject {
   weight: string;
   height: string;
   isExamined: boolean;
+  hasPrescription?: boolean
 }

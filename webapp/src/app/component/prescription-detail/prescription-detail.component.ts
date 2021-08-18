@@ -88,7 +88,8 @@ export class PrescriptionDetailComponent implements OnInit {
       this.form.patchValue({note: prescription.note});
 
       this.diagnosisList = prescription.diagnoses;
-      this.indicationDataSource = new MatTableDataSource(prescription.indications);
+      this.diagnosisList.sort((a, b) => a.seqNo - b.seqNo);
+      this.indicationDataSource = new MatTableDataSource(prescription.indications.sort((a, b) => a.id! - b.id!));
     }
   }
 
@@ -142,6 +143,6 @@ export class PrescriptionDetailComponent implements OnInit {
   }
 
   getPrintPrescriptionEndPoint() {
-    return `${environment.server}/print/prescription/${this.prescription.id}`;
+    return `${environment.server}/print/prescription?patientId=${this.patientId}`;
   }
 }

@@ -2,6 +2,30 @@
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prescription" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bdcda109-addd-477d-8eae-b0930fb6e96d">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="diagnoses" uuid="1d9a31c3-80ef-4d1e-a348-e56f95af01a6">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="seqNo" class="java.lang.Integer"/>
+		<field name="diagnosis" class="com.ctran79.clinic.backend.domain.dictionary.DictionaryValueDto"/>
+	</subDataset>
+	<subDataset name="indication" uuid="30ee253c-7857-4e91-b94d-2b204c129810">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="drug" class="com.ctran79.clinic.backend.domain.drug.DrugDto"/>
+		<field name="usage" class="java.lang.String"/>
+		<field name="quantity" class="java.lang.Double"/>
+		<field name="unit" class="com.ctran79.clinic.backend.domain.dictionary.DictionaryValueDto"/>
+		<field name="seqNo" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="patientGender" class="java.lang.String"/>
+	<parameter name="patientAddress" class="java.lang.String"/>
+	<parameter name="patientName" class="java.lang.String"/>
+	<parameter name="diagnoses" class="java.util.List"/>
+	<parameter name="indications" class="java.util.List"/>
+	<parameter name="note" class="java.lang.String"/>
+	<parameter name="createDate" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -9,7 +33,8 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="42" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout"/>
 			<staticText>
 				<reportElement x="0" y="0" width="180" height="20" uuid="b298e753-d0c6-4aa2-834d-5d33be3e0679"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -18,7 +43,7 @@
 				<text><![CDATA[Phòng khám da liễu Bs.Hà]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="20" width="180" height="20" uuid="3a6a71d0-8d7d-414c-8918-8ef9a581e629"/>
+				<reportElement x="0" y="20" width="180" height="22" uuid="3a6a71d0-8d7d-414c-8918-8ef9a581e629"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 				</textElement>
@@ -34,21 +59,183 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="200" height="43" uuid="4cc5cd15-f48a-4eb1-8eb0-138b5de3f545"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PHIẾU TƯ VẤN]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="60" y="0" width="300" height="20" uuid="c7054f80-248b-4130-aadd-f0a464f51d98"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{patientName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="20" uuid="49b286b6-a708-4699-9d4d-023abdf3e6c0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bệnh nhân:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="60" height="20" uuid="361d2bf2-5f01-4627-9eca-38c92de7cc54"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Giới tính:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="420" y="0" width="135" height="20" uuid="2da8eff8-6cca-4ce0-b078-5a942ad1d390"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{patientGender}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="60" height="20" uuid="a20debe2-0243-4099-9e76-0940d46e43a0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="20" width="495" height="20" uuid="7e345030-c2c6-41fb-b5d5-b52fdc2423ac"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{patientAddress}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="abd03831-1698-4a57-adea-afe7c93d85a5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chẩn đoán:]]></text>
+			</staticText>
+		</band>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<componentElement>
+				<reportElement stretchType="ContainerHeight" x="20" y="0" width="535" height="20" uuid="5e5692cd-b209-48c1-bbfa-8784ef2220e9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="diagnoses" uuid="b7b38160-dc25-45e5-b379-f5afd70f0f6b">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{diagnoses})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="535">
+						<textField>
+							<reportElement x="0" y="0" width="535" height="20" uuid="350b9e8b-6940-4ea5-bb0d-dc4cef6d8c17">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{seqNo} + "." + $F{diagnosis}.getValue()]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="8628e1f5-12c3-4980-970e-e584d1ed6a8f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chỉ định thuốc:]]></text>
+			</staticText>
+		</band>
+		<band height="50">
+			<componentElement>
+				<reportElement x="20" y="0" width="535" height="50" uuid="1a4f9c20-d0a2-4785-83ce-f1e83c96ac3d">
+					<property name="com.jaspersoft.studio.layout"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="indication" uuid="fb31c2a7-6cdf-4c98-a9f2-cfa4c72d848a">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{indications})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="50" width="535">
+						<textField>
+							<reportElement x="390" y="0" width="145" height="20" uuid="ff32d9ad-3ae3-491f-901d-2ae148053b58"/>
+							<textElement>
+								<font fontName="Arial"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Số lượng: " + new java.text.DecimalFormat("#0.00").format($F{quantity}) + " " + $F{unit}.getValue()]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="0" width="390" height="20" uuid="042e6a5e-035f-4976-8ab9-111dab315a44">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textElement>
+								<font fontName="Arial" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{seqNo} + "." +$F{drug}.getName()]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="20" width="535" height="30" uuid="02880092-bc4b-410f-bbdf-2a2cac592c7d">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.y" value="px"/>
+							</reportElement>
+							<textElement>
+								<font fontName="Arial" isBold="false" isItalic="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{usage}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="54">
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="20" uuid="d3989684-4e2b-4795-bf0b-a847b9c80cd3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lời dặn của bác sĩ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="555" height="34" uuid="76c74607-3bde-4012-91e2-416fe35cc837"/>
+				<textElement>
+					<font fontName="Arial" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{note}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="105">
+			<textField>
+				<reportElement x="390" y="0" width="165" height="20" uuid="c3c85f36-316e-4684-b2f8-2cfa698d20bc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ngày khám: "+$P{createDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="71" width="175" height="20" uuid="dce776c6-5dda-41de-a3fb-2c46247d98eb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bs. Trần Quang Hà]]></text>
+			</staticText>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

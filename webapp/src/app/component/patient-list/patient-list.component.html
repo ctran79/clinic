@@ -1,23 +1,23 @@
 <h2>Danh sách bệnh nhân</h2>
-<app-table-filter [filter]="searchModel" (change)="onFilterChanged()"></app-table-filter>
+<app-table-filter (change)="onFilterChanged()" [filter]="searchModel"></app-table-filter>
 <mat-table #table
            (matSortChange)="sortData($event)"
            [dataSource]="dataSource"
            matSort>
 
   <ng-container matColumnDef="createDate">
-    <mat-header-cell class="col-2" *matHeaderCellDef mat-sort-header><b>Ngày đăng kí</b></mat-header-cell>
-    <mat-cell class="col-2" *matCellDef="let obj">{{obj.createDate | date : 'dd/MM/yyyy'}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef class="col-2" mat-sort-header><b>Ngày đăng kí</b></mat-header-cell>
+    <mat-cell *matCellDef="let obj" class="col-2">{{obj.createDate | date : 'dd/MM/yyyy'}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="isExamined">
-    <mat-header-cell class="col-1" *matHeaderCellDef><b>Tình trạng</b></mat-header-cell>
-    <mat-cell class="col-1" *matCellDef="let obj">{{patientIsExamined(obj)}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef class="col-1"><b>Tình trạng</b></mat-header-cell>
+    <mat-cell *matCellDef="let obj" class="col-1">{{patientIsExamined(obj)}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="age">
-    <mat-header-cell class="col-1" *matHeaderCellDef><b>Tuổi</b></mat-header-cell>
-    <mat-cell class="col-1" *matCellDef="let obj">{{obj | patientAge}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef class="col-1"><b>Tuổi</b></mat-header-cell>
+    <mat-cell *matCellDef="let obj" class="col-1">{{obj | patientAge}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">
@@ -38,6 +38,9 @@
       </button>
       <button (click)="addOrEditPrescription(obj)" color="primary" mat-button>
         <mat-icon>fact_check</mat-icon>
+      </button>
+      <button *ngIf="obj.hasPrescription" (click)="printPrescription(obj)" color="accent" mat-button>
+        <mat-icon>print</mat-icon>
       </button>
     </mat-cell>
   </ng-container>
