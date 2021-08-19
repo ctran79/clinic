@@ -4,10 +4,10 @@ import com.ctran79.clinic.backend.domain.prescription.Prescription;
 import com.ctran79.clinic.backend.domain.prescription.PrescriptionDto;
 import com.ctran79.clinic.backend.facade.PrescriptionFacade;
 import com.ctran79.clinic.backend.service.prescription.PrescriptionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
 
 /** @author ctran79 */
 @RestController

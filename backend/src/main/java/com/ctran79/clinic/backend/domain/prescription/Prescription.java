@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class Prescription extends BaseEntity {
   @NotNull
   @JoinColumn(name = "patient_id")
-  @OneToOne
+  @OneToOne(cascade = CascadeType.MERGE)
   private Patient patient;
 
   @OneToMany(

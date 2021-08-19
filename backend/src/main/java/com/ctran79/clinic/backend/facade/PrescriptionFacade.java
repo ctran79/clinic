@@ -10,6 +10,7 @@ import com.ctran79.clinic.backend.service.prescription.PrescriptionService;
 import net.sf.jasperreports.engine.*;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
@@ -127,5 +128,14 @@ public class PrescriptionFacade extends BaseCrudFacade<Prescription, Prescriptio
     params.put("note", prescription.getNote());
 
     return JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());
+  }
+
+  @Transactional
+  @Override
+  public PrescriptionDto createOrUpdateModel(PrescriptionDto dto) {
+    Prescription prescription = toEntity(dto);
+    prescription.getPatient().setIsExamined(true);
+    prescription = prescriptionService.createOrUpdateModel(prescription);
+    return toDto(prescription);
   }
 }
