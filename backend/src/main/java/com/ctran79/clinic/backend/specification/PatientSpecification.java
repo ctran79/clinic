@@ -2,6 +2,7 @@ package com.ctran79.clinic.backend.specification;
 
 import com.ctran79.clinic.backend.domain.patient.Patient;
 import com.ctran79.clinic.backend.domain.patient.Patient_;
+import com.ctran79.clinic.backend.service.Utils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
@@ -24,13 +25,13 @@ public class PatientSpecification extends BaseSpecification<Patient> {
 
       if (StringUtils.hasText(params.get(CREATE_DATE_FROM))) {
         LocalDateTime startOfDay =
-            LocalDate.parse(params.get(CREATE_DATE_FROM), DATE_TIME_FORMATTER).atStartOfDay();
+            LocalDate.parse(params.get(CREATE_DATE_FROM), Utils.DATE_TIME_FORMATTER).atStartOfDay();
         predicates.add(
             criteriaBuilder.greaterThanOrEqualTo(root.get(Patient_.CREATE_DATE), startOfDay));
       }
       if (StringUtils.hasText(params.get(CREATE_DATE_TO))) {
         LocalDateTime endOfDay =
-            LocalDate.parse(params.get(CREATE_DATE_TO), DATE_TIME_FORMATTER).atTime(23, 59, 59);
+            LocalDate.parse(params.get(CREATE_DATE_TO), Utils.DATE_TIME_FORMATTER).atTime(23, 59, 59);
         predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(Patient_.CREATE_DATE), endOfDay));
       }
       if (StringUtils.hasText(params.get(ALL_PATIENTS))) {

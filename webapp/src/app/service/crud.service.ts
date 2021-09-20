@@ -7,6 +7,7 @@ import {BaseSearchModel} from "../domain/base-search-model";
 import * as _ from "lodash";
 import {PagedSearchResult} from "../domain/paged-search-result";
 import {formatDate} from "@angular/common";
+import {toDateUtc} from "../utils/utils";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,8 @@ export abstract class CrudService<T extends BaseObject> {
   }
 
   public saveModel(model: T): Observable<T> {
-    return this.http.post<T>(`${this.api}`, model, {headers: this.headers});
+    const _model = toDateUtc(model);
+    return this.http.post<T>(`${this.api}`, _model, {headers: this.headers});
   }
 
   public search(searchModel: BaseSearchModel): Observable<PagedSearchResult<T>> {
@@ -55,7 +57,7 @@ export abstract class CrudService<T extends BaseObject> {
 
     searchModel.fields.forEach(field => {
       if (_.isDate(field.value)) {
-        params = params.set(field.name, formatDate(field.value, 'dd/MM/yyyy HH:mm:ss', 'en-GB'));
+        params = params.set(field.name, formatDate(field.value, 'yyyy-MM-dd HH:mm:ss', 'en-GB'));
       } else if (_.isBoolean(field.value) || !_.isEmpty(field.value)) {
         params = params.set(field.name, field.value);
       }

@@ -40,6 +40,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatListModule} from "@angular/material/list";
 import {DiagnosisDialogComponent} from './component/diagnosis-dialog/diagnosis-dialog.component';
 import {CustomDateAdapter} from "./utils/custom-date-adapter";
+import {NotifierModule} from "angular-notifier";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import {CustomDateAdapter} from "./utils/custom-date-adapter";
     MatDatepickerModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatListModule
+    MatListModule,
+    NotifierModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},

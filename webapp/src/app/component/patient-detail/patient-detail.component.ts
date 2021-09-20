@@ -19,7 +19,7 @@ export class PatientDetailComponent implements OnInit {
   patient!: Patient;
   id: number = this.activatedRoute.snapshot.params.id;
   genderDict: DictionaryValue[] = [];
-  compareFn =  compareFn;
+  compareFn = compareFn;
 
   constructor(public formBuilder: FormBuilder,
               public router: Router,

@@ -1,5 +1,7 @@
 import {NativeDateAdapter} from "@angular/material/core";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class CustomDateAdapter extends NativeDateAdapter {
 
   parse(value: any): Date | null {
@@ -11,7 +13,7 @@ export class CustomDateAdapter extends NativeDateAdapter {
       const month = Number(str[1]) - 1;
       const date = Number(str[0]);
 
-      return new Date(year, month, date);
+      return new Date(Date.UTC(year, month, date));
     }
     const timestamp = typeof value === 'number' ? value : Date.parse(value);
     return isNaN(timestamp) ? null : new Date(timestamp);

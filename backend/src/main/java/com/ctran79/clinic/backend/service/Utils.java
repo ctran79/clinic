@@ -1,18 +1,10 @@
 package com.ctran79.clinic.backend.service;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
-import org.springframework.util.ResourceUtils;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
 
 public class Utils {
-  public static JasperReport getCompiledReport(String reportName)
-      throws JRException, FileNotFoundException {
-    File reportFile = ResourceUtils.getFile("classpath:reports/" + reportName + ".jrxml");
-    return JasperCompileManager.compileReport(new FileInputStream(reportFile));
-  }
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
 }

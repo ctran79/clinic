@@ -48,7 +48,7 @@
   <mat-checkbox class="w-100" [formControl]="getControl('isExamined')">Đã khám</mat-checkbox>
 
   <div class="mt-2">
-    <button color="primary" class="me-2" mat-flat-button>Lưu</button>
-    <button color="warn" class="m-left-1" mat-flat-button>Danh sách bệnh nhân</button>
+    <button color="primary" class="me-2" mat-flat-button type="submit">Lưu</button>
+    <button color="warn" class="m-left-1" mat-flat-button (click)="navigateToList()">Danh sách bệnh nhân</button>
   </div>
 </form>

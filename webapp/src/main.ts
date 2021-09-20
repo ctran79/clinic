@@ -13,5 +13,5 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
 Date.prototype.toJSON = function () {
-  return formatDate(this, 'dd/MM/yyyy HH:mm:ss', 'en-GB');
+  return formatDate(this, 'yyyy-MM-dd HH:mm:ss', 'en-GB');
 }

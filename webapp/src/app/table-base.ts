@@ -21,14 +21,10 @@ export abstract class TableBase<T extends BaseObject> implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(this.searchModel.name)) {
-      this.searchModel = JSON.parse(localStorage.getItem(this.searchModel.name)!);
-    }
     this.search();
   }
 
   search() {
-    localStorage.setItem(this.searchModel.name, JSON.stringify(this.searchModel));
     this.loadData(this.searchModel);
   }
 
